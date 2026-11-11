@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --red:#DC2715; --red-d:#B81F10; --red-s:#FDECEA; --ink:#1B1F23; --gray:#4F5B54; --mute:#7A8580;
+  --line:#E4E7E5; --bg:#F5F6F4; --card:#FFFFFF; --ok:#1E7B4F; --ok-s:#E7F4EC; --warn:#A35C00; --warn-s:#FFF4E0;
+  --r:16px;
+}
+*{box-sizing:border-box}
+/* PC 화면에서는 글자·버튼을 전체적으로 키워 읽기 쉽게 (휴대폰은 그대로) */
+@media (min-width:900px){html{zoom:1.12}}
+@media (min-width:1500px){html{zoom:1.2}}
+@media (min-width:2200px){html{zoom:1.4}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,"Malgun Gothic",sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere}
+.hero{padding-top:58px!important;background:linear-gradient(135deg,#1B1F23 0%,#2B3330 60%,#4F5B54 100%);color:#fff;padding:44px 16px 72px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,#1B8FB8aa,#1B8FB800 70%)}
+.wrap{max-width:788px;margin:0 auto;position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em;font-size:13px;opacity:.9}
+.brand i{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--red)}
+.hero h1{font-size:28px;font-weight:800;margin:14px 0 8px;letter-spacing:-.02em;line-height:1.3}
+.hero p{margin:0;opacity:.82;font-size:14.5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px;font-size:13px}
+.chip b{font-weight:700}
+main{max-width:820px;margin:-44px auto 0;padding:0 16px 120px;position:relative;z-index:2}
+.card{background:var(--card);border-radius:var(--r);box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(27,31,35,.06);padding:24px;margin-bottom:16px}
+.card h2{font-size:18px;margin:0 0 4px;display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em}
+.num{width:26px;height:26px;border-radius:8px;background:var(--red);color:#fff;font-size:13px;display:inline-flex;align-items:center;justify-content:center;font-weight:800}
+.desc{color:var(--mute);font-size:13.5px;margin:0 0 18px}
+.notice{background:var(--warn-s);border-left:4px solid #F0A020;padding:12px 14px;border-radius:10px;font-size:13.5px;color:#5E3C00;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.grid .full{grid-column:1/-1}
+.grid>*{min-width:0}
+.item{min-width:0}
+@media(max-width:640px){.grid{grid-template-columns:1fr}.hero h1{font-size:23px}.card{padding:18px}}
+label{display:block;font-size:13px;font-weight:700;color:var(--gray);margin-bottom:6px}
+label .req{color:var(--red);margin-left:2px}
+label .opt{color:var(--mute);font-weight:500;margin-left:4px}
+input,select,textarea{width:100%;font:inherit;font-size:15px;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);transition:.15s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 4px rgba(220,39,21,.1)}
+.hint{font-size:12px;color:var(--mute);margin-top:5px}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.seg.two{grid-template-columns:repeat(2,1fr)}
+@media(max-width:640px){.seg{grid-template-columns:repeat(2,1fr)}}
+.seg input{display:none}
+.seg label{margin:0;border:1.5px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center;cursor:pointer;font-weight:600;color:var(--ink);font-size:13.5px;line-height:1.3;background:#fff}
+.seg label small{display:block;color:var(--mute);font-weight:500;font-size:11.5px}
+.seg input:checked+label{border-color:var(--red);background:var(--red-s);color:var(--red-d)}
+.item{border:1.5px solid var(--line);border-radius:14px;padding:18px;margin-bottom:12px;position:relative;background:#FCFCFB}
+.item-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.item-h b{font-size:14.5px}
+.del{border:none;background:none;color:var(--mute);cursor:pointer;font:inherit;font-size:13px;padding:4px 8px;border-radius:8px}
+.del:hover{background:#F0F0F0;color:var(--red)}
+.add{width:100%;border:1.5px dashed #C9CFCB;background:#fff;border-radius:12px;padding:13px;font:inherit;font-weight:700;color:var(--gray);cursor:pointer}
+.add:hover{border-color:var(--red);color:var(--red)}
+.file{display:flex;align-items:center;gap:10px;border:1.5px dashed #C9CFCB;border-radius:10px;padding:10px 12px;background:#fff;cursor:pointer}
+.file input{display:none}
+.file .ico{width:34px;height:34px;border-radius:8px;background:var(--red-s);color:var(--red);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;flex:none}
+.file .t{font-size:13.5px;color:var(--gray);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file.has{border-style:solid;border-color:#9BC9AE;background:var(--ok-s)}
+.file.has .ico{background:#fff;color:var(--ok)}
+.empty{color:var(--mute);font-size:13.5px;text-align:center;padding:6px 0 14px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.check input{width:20px;height:20px;flex:none;margin-top:2px;accent-color:var(--red)}
+.bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);z-index:5}
+.bar .in{max-width:820px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.sum{flex:1;font-size:13px;color:var(--gray)}
+.sum b{color:var(--ink)}
+.go{border:none;background:var(--red);color:#fff;font:inherit;font-weight:800;font-size:15.5px;padding:13px 26px;border-radius:12px;cursor:pointer;box-shadow:0 6px 16px rgba(220,39,21,.28)}
+.go:hover{background:var(--red-d)}
+.go:disabled{background:#C9CFCB;box-shadow:none;cursor:default}
+.err{color:var(--red);font-size:12.5px;margin-top:5px;display:none}
+.bad input,.bad select{border-color:var(--red)}
+.bad .err{display:block}
+.modal{position:fixed;inset:0;background:rgba(27,31,35,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.modal.on{display:flex}
+.box{background:#fff;border-radius:20px;max-width:440px;width:100%;padding:28px;text-align:center}
+.box .big{width:64px;height:64px;border-radius:50%;background:var(--ok-s);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 14px}
+.box h3{margin:0 0 6px;font-size:20px}
+.box p{color:var(--gray);font-size:14px;margin:4px 0}
+.prog{height:6px;background:#EEE;border-radius:9px;overflow:hidden;margin:16px 0 6px}
+.prog i{display:block;height:100%;width:0;background:var(--red);transition:width .3s}
+.closed{text-align:center;padding:40px 20px}
+.role-help{font-size:12px;color:var(--mute);margin-top:6px}
+footer{text-align:center;color:var(--mute);font-size:12px;margin-top:24px}
+.lang{position:absolute;top:12px;right:12px;z-index:20;display:flex;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:3px}
+.lang button{border:none;background:none;color:#fff;font:inherit;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:999px;cursor:pointer;opacity:.75}
+.lang button.on{background:#fff;color:#1B1F23;opacity:1}
+
+/* ---------- 관리자 화면 ---------- */
+.adminlink{display:block;text-align:center;margin:10px auto 0;color:var(--mute);font-size:12px;text-decoration:none;opacity:.7}
+.adminlink:hover{opacity:1;color:var(--red)}
+#admin{max-width:1180px;margin:-44px auto 0;padding:0 16px 80px;position:relative;z-index:2}
+.a-login{max-width:420px;margin:0 auto}
+.a-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.a-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+@media(max-width:760px){.a-stats{grid-template-columns:repeat(2,1fr)}}
+.a-stat{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(27,31,35,.06)}
+.a-stat b{display:block;font-size:24px;font-weight:800;letter-spacing:-.02em}
+.a-stat span{font-size:12.5px;color:var(--mute)}
+.a-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.a-tools input[type=search]{width:240px;padding:9px 12px}
+.btn{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:9px 14px;font:inherit;font-size:13.5px;font-weight:700;color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--red);color:var(--red)}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff}
+.btn.sm{padding:5px 10px;font-size:12.5px;border-radius:8px}
+.a-list{display:flex;flex-direction:column;gap:10px}
+.a-row{background:#fff;border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(27,31,35,.05);overflow:hidden}
+.a-head{display:grid;grid-template-columns:110px 1.2fr 1fr 1fr 150px 160px 24px;gap:10px;align-items:center;padding:14px 18px;cursor:pointer}
+.a-head:hover{background:#FAFAF9}
+@media(max-width:860px){.a-head{grid-template-columns:1fr 1fr;row-gap:4px}.a-head .hide-m{display:none}}
+.a-head .nm{font-weight:800}
+.a-head .sub{font-size:12.5px;color:var(--mute)}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:700;background:#F0F2F1;color:var(--gray);margin-right:4px}
+.pill.old{background:#FFF4E0;color:var(--warn)}
+.pill.ok{background:var(--ok-s);color:var(--ok)}
+.a-body{display:none;border-top:1px solid var(--line);padding:14px 18px 18px;background:#FCFCFB}
+.a-row.open .a-body{display:block}
+.a-row.open .chev{transform:rotate(90deg)}
+.chev{transition:.15s;color:var(--mute)}
+.a-body h4{margin:14px 0 8px;font-size:13.5px;color:var(--gray)}
+.a-body h4:first-child{margin-top:0}
+.a-tbl{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden}
+.a-tbl th{background:#F2F4F3;text-align:left;padding:8px 10px;font-size:12px;color:var(--gray);white-space:nowrap}
+.a-tbl td{border-top:1px solid var(--line);padding:8px 10px;vertical-align:top}
+.a-wrap{overflow-x:auto}
+.viewer{position:fixed;inset:0;background:rgba(27,31,35,.72);display:none;z-index:30;padding:20px}
+.viewer.on{display:flex;flex-direction:column}
+.viewer .vbar{display:flex;gap:8px;align-items:center;color:#fff;margin-bottom:10px}
+.viewer .vbar b{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.viewer .vbody{flex:1;background:#fff;border-radius:12px;overflow:auto;display:flex;align-items:center;justify-content:center}
+.viewer iframe{width:100%;height:100%;border:0}
+.viewer img{max-width:100%;max-height:100%}
+.empty-a{text-align:center;color:var(--mute);padding:40px 0}
+[hidden]{display:none!important}
+.mlogo{height:26px;width:auto;display:block}.mlogo.dl{height:34px}.mchar{position:absolute;right:0;top:-6px;width:74px;height:74px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}@media(max-width:640px){.mchar{width:54px;height:54px}}
+@media(max-width:640px){.mlogo{height:21px}.hero{padding-top:70px!important}}
+.hero .rule{width:44px;height:3px;background:var(--red);border-radius:3px;margin:22px 0 12px}
+.gate{max-width:560px;margin-left:auto;margin-right:auto}
+.gate .ico-l{width:46px;height:46px;border-radius:14px;background:var(--red-s);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px}
+.row2{display:flex;gap:8px}.row2 input{flex:1;min-width:0}.row2 .btn{white-space:nowrap}
+.code-in{font-size:24px!important;letter-spacing:10px;text-align:center;font-weight:800}
+.gnote{font-size:12.5px;color:var(--mute);margin-top:14px;line-height:1.6}
+.sess{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border-radius:14px;padding:12px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(27,31,35,.05);font-size:13.5px}
+.sess .who{display:flex;align-items:center;gap:8px;min-width:0}.sess .who b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sess .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
+.linkbtn{border:none;background:none;color:var(--mute);font:inherit;font-size:13px;cursor:pointer;text-decoration:underline}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:#E9EBEA;border-radius:12px;padding:4px;margin-bottom:16px}
+.tabs button{border:none;background:none;font:inherit;font-weight:700;font-size:14px;color:var(--gray);padding:10px;border-radius:9px;cursor:pointer}
+.tabs button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.sub2{font-size:12.5px;color:var(--mute)}
+.mine-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.file.keep{border-style:solid;border-color:#B9C7E8;background:#EEF2FB}
+.file.keep .ico{background:#fff;color:#3F61B2}
+input[readonly]{background:#F5F6F4;color:var(--gray)}
+</style>
+</head>
+<body>
+<div class="lang"><button type="button" id="lk" onclick="setLang('ko')">한국어</button><button type="button" id="le" onclick="setLang('en')">English</button></div>
+<div class="hero"><div class="wrap">
+  <img class="mlogo dl" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAAAuCAYAAAAWYZTNAAAQAElEQVR4Aeycf4xdRRXHZ96WFlHB/mBbCKh0226LhERLEAPKj0CM/qVGflSiQlTwD4lGMdTgL5QYIDHizwjGiBoRQYxEjERAIMZEItUopCx0W0GgsltoBQH50e71+5l95+28++597773drfd7mzm+2bmzJkzZ86cMzP3vtfWXPpLFkgWmLMWSAE8Z5cuKZ4s4FwK4OQFyQJz2AIpgOfw4iXVkwXmcwCn1U8WmPMWSAE855cwTWA+WyAF8Hxe/TT3OW+BFMBzfgnTBOazBVIAz8/VT7PeTyyQAng/Wcg0jflpgRTA83Pd06z3EwukAN5PFjJNY35aoDSAH1m37LDRdcvPHl07eP2WtcsfVD4u7BDIq+Cp0eHBXVuHV5wfmzbLskXCJ4QDY7qVRT9W+IYwIjxdAf8RzxPCqSaDXPUDheuEp4TxLrBDvA8jo19IzgXC7XWsL5KntiuEwFPU3g3N5Ci/opt+3fBK9krh9DoWK+84xyry63IuUX5JFf4yHvUPtlReZoOyrl3RJR8bKAvp9qLOapmWtW0npyWA71vvDtg6vPyTu7Pa313mbnDOb/AuW+ucO1RYJpBXwVLv3dVDDz35I/UJSYp4Fa4TPu29f1F5U1L7F0S4T/iUMCwsqYBDxIO8u5SHJDkLVPix8GFhqVBFX+NhjivUZzrSYgk5vQ7KKrYkAtt4Go2aw3oBJ2mHlY0OkwWTg8xJSg+fGteCNC8faWfqA4cFjMO8bFzKau4pIZegAz0JqHcyXdCtTnJOc2oEk8oW5B3zhoDeCuhg+vQmYbJXqZymAB4ZXn7U655fflvms6ud83LozGnqQvfJO/+5oZHxy6ynjMZYP1T9HGGX0JTUfrkIXxEOEKqm58X4fm0Gv1AekuQsVOFnwllCr+mVXjpqbBxC2WSSjNgZm9rEQQCIpTTRF552wOlLBfTSIL0Yd6v6Mu7Wel3V6kl9wkmq/ILqvZo56Stgs0po7l1Yi4PAgqpKHoTVdVE2mUTEPspCYpOdbJj6RHZozH+Ipepm0tF+BFWQP3rM4Ucu8NltCtjTAkHH72Te0+fFQyNjOELoLIU5Eb+ril2n2RlUnUxqf7NKlwrdpBfEvEHBe7PykCSHazknfD/BiyzPxxwAjmPB0tfVk7nKfsgAVA1BvlUq5qw96GeD4TQnCKqik2qbxHBHRbQcMOo3nanqZoIN2o4bAnjLqlWL3O7dOP6attyus19nrnbZqpHxr5scOQXB+z3VPy6Upc+WNZTQXxL9fAXvb5SHpHG4Kv9SlQ1Cv4mNoBcZG9XpjAgXqgwNUI7boKm5NNEe81sZR7ROODeBYjB617nsh7NY8OLAjE+OLIKYdsqzBcaOAy6ed74NvrZ6yVc2CmdUgQTFY6ka0k36xCZVsU38ZQn56FwE2sr6tdBDALsDnv2IWnTyFgbo9sz5S7PMv8fX3OneOxmhGLVa9o7VI09+WbLiRP1jMSEuy3F0VXfvjmn18iPKzxVw3Hcqj3Gi9/5G0eLERvEDEWI+yvS/WPR82i0CNwKCAJ4Y71Jb10k6bRJYFHbYayQAWHBRBuvhEdouFO3CHTEkjz5Fz6Vq6jthBwvSCzXulZLIpqPMQe/nNEVGV9D41wryNR+gzgSOspCwc6AbT6DO4IfGQZ8rlWMX1pjRsBlgTdhUGjziawpg+TmbILhAbaWbiYTG81S1faptXbn4EJ+5+s6bidsLk0m1m31twdtWj4x9bfVDY7cMbR67c+jB8TvKsHLzjj9O9mz65HrcRMhVcI5X5WhUr9NErxdw4t8rj4Ejw9OA2seEW4SYjzLGLtJrQp3vFD9gjBj3qK2npIWygLVFZXyAPGg8/8BDvVvwTIS96IezSP2pBLEPoFvoLomcNs7yQHSu0V6v95TJPry55urfBAlbLMxakh6Mryykuv83hicoqdi6UQ4QN2vHi1Zy+ADrwuZ8n9rZvANv7gN+MK0bYW1i4QEnaKDXO2eBq7B1/Pl73O6Dzx3avP1f1PoA19123QmkonbeBhfRe6EVbRDIOYiPaYY5A5vMkPeNE4Q36rYrG0/T0Fp8Sy3tasBJcAD6sNvfJBpO2AANfcAcL++0Vg/jSH6/gcw4vADKA7rEl6Z43Lhc2qGXBtk01gM7N8SojTWwtWEtOY05McOGJ0b0yt8MRZ65pFtvph2B4LXADYPtybzbuHp0tFPwuW1rVhw/Orzi1C1rl528Ze0KYdnJI8vca4OUah9jYntayKePymDXC5cJX63jcuXUz1E+mO+wj9RZWFRhMWNnYKe2U8Z44GsLzZMTC6dhhzdenAbZ+SCw9sJcslYKXOPQLc9juuXpVrfxcGKjzWYe68w84vp06sHa8DjFi9Brc4IVKw0KV3iuwlyrY150Y60bjBS0kVtCNiS+2uKrQnvLbnbFzqFdH+iibCrV1481DPy1zPu36s3zFEco+XtXPzj251Bs87F17eCXJmrZvc5nf/Cudrd3E0Lt7oHXvOpNruKfZvVfsf5UyCdeJPFC6otq+HwdvKmm/nPV79dkrhLgU3WmU2X57MowExAsjlTM2B3ZmaHRZjyUYxCYYJM6WeDadc34eD7NO5a1leaSh8Pz9RCnOF8PUS/ln8EGbiY4cR7Q2w0bBw98+Tq0Fmje/NAEh2+CGOP+3C5Cu+gEBkGEfQiwQJcc6vGJbGupLiHF9ZgvNJZ80IdgB5TzbEVyWD8Q9K+pR/SjBU5iUVzW8ZdIW4YHr5BX6gWVPnNfOU3sdhNI6QLfFu9TQjeJE5i317+TcfkxRzd9Z4xXGxLBhXPatcrGYjGgsXPDY/RGrr7s5gQ3DrRTDSwUjqOiYzeO+wZZamAsg6qlKSx41JqvR02FRQKMcQp1L+xRQNQcdwnx+4ZQFiv2UdaatL44uNnBGAg0K7fLmSd2zCPuj/x8e77O+PY4wXg3Si/eZxDgbM6MA32b5oetKPcC1t76ldrEGGoKP4K4XldNJZ3KpQEojoHRdYNXeW8vvtShz+S9f1wieFP9svJu0ynq8E1hn0maD07JtYrT1PQ6S3Ro27Tw7PhnKo8Xy/jIYwdgEZFznPo3HEhlHIVxGqBjG8QyYSur53WyOm9+GZ+NhP6zCR4hbDzbQLiqxnRrn7FcNmdsNljGIKAZn0BvBK8aWGNlPSfsi51Z1/waOelgic3U1XTmtjx/1rLsiLLhFbwf0IGrr3f8o+LZLuSSJOYoVare+1+L733CQ0K36VwFw7HddppOfo3PdYsrcwOSH+/y0LX/Oa6xPLuya7Pzi605yRYsII7CdXmJ6pzMBLI9N+WvhWwIXMFYVEDANwmVDGTytRA5z27kMU+QLwJXd5yTsciRK3K4AZDPKmRXgsTsRAAxN9OVEzC2cYtumje3FmV9p2AvSWH84zQQOTSAXtiWTbYl6MRbOSFfQGfWsWO/mkL6b3kuedlJ/1yzlN8/55vcwgUv3fpiLRs+6NUDR9cmau8Vwx4hSuod1bopSvHfip+vnc5W/h2B3zPH+Ilo/xDyie+A+d1znj7bdRwtBgFQpIPtsuRF7VoWT5DhGKEdRxa4VvNMzAstdn4DGwJtODtX1EInkn356gnnYHMIcqMPruRWRQ7lek7Rxe2BUOGDzYDNBcSbDtdPvnJB51Ixmi/jM0d4CFrbyAgeaOAa8RHIttFAK4V40YnbD1dfNtUY0NCzrSzZkdsIumBLwEaLbdExHhs9CUQQ0zuW63pit7a61CTpV0KUPOWD9tQGeFlEuQlvuP+ZXcds3vHc4Zu2v7BngXuuqbFR6ebnzI1OoSDj/E+4UbhIOC8HgvTtYixy/DeKvteS9CRoWLA8WDzDkPhI5Cx8paDQYlrA2mIyf3Z+g82bzQOHtGuv0TvmUspkwosTsxPb6cZ1jnbaugF6sLkAmwMByZWTNptPk0zNl+sxfeC1NgIm6CBd2diAtRHo3GisXphLLnzcgOBFNvaKAQ09d4q3cFMQnaBS1jlJCTZb5gFU1eviLGPDYY2gMV6g64PNoyFUdTY3eLCVqsWpVhvI7lbTM0I9ZfXcbRhdd+jld53iON2M1pRnr/gGc1OD6+nfAjSLKKlp8Z5V02NCPi3KE2a7Lt1wMk43gtmGj59VgwNaQ5VcK4qDWSAhl+AHbAAGdl02DkQSFLFjQKsKroH5U4S6ya4qpxMfGw+b10bNr+WWIjvm7cTphl0bcsWDrqYXOrZ99tQ4BC92wT7IQQf6x4CGLNrhJ5gpTyeYL2sK2MRMtulldcvL6KG9tvKB8TE9037LOXzA1f/q5cxfeuTY4F2jawcv3LJqcOixo49YEmPA7+b3x/U+vWUy7AJhubCiIj6okbhmK2tK0SbURN8bFRYGZwEsWDsdgiOLAUdS1pKQZUSu1XnnDm1yaBwcB6SOc5B3BclANs93nG7IIu/luc5uHHHOpqMhQmLj4aUeGx5jFulJQNLG9ZRgbeGRJOY8pAZkWeCpWpgISBrgQxd0YPwY6Is8Nkp4uWrH9oeGTqxVFcBLnxjIxrYxsHMsDz2wu6bomWPcv6nMFdotGlh4tY7SkakW1aySuZNU/L5f4B54ceLlLTGymr9VbQNCLnV1hT5KnR8QGL8TeMHFc/DB4s+ne/OEuVDXCl0rBCcq0ReHs6bS65Q2PxwNwFvkONA7QrpwYyBocHDyrmVJBlfuPLqSIxk8yxNoOHep3uJDX4KhlKfeYCcZckt1kTzsTZDVuznrF+pqZ7ywXiq3zdWhZRz1YRPGtjGwcywL28U6SFRxCgF85ObHd2Y1d55zDuWV5VM4kQ/U55JJ+JCLK/f9q1pFdN1dodkAlqgbsjqhKHDV1fFrLv4NMOV9DTxLhWceBVmnnBO7SX8tOA5si8mzKT/C4DmKZyYDz0o8b5mzsZs3yUkVhx0xA8/X2BDb8TwbAxq2tEcWgrXK5oDcvYIQwIy8ZvOYTrABju5HqTcjOpFDQ1y3oKUhplOvBDrxL4MqMZcwfUaO3vJ1WAnvbJM5FbnSVgG8RfqxLuZIXMlxMILdgGz6sQGzm3Mtp54wZQE2NbMLNsR2BGsMaGZLNk2u8VMS9sFSI4DRbdXIvzftmdhzonP+BtfHn0JaqSGAE7ZRqRfiF2PwdnXnrssg4yusixW8nU5fxoA/BmMW0WOeXssEEgHXLXCaljE1P659BDHPpzgip0ksGxrO1vHK2SK8S4J04aqnLCR06FLC3mGXttgQG2FHniuLdIeGbXmm5hm0cD32wgzQA91A0/BNAUzL8MNPP7FqZGyDn6gd75znu1i+J34ic35n5lwdcTmr06zN7fQDPn4NzcslXonn4ep/nL5cgfPtZXVOWr4KYJM5QQvT+M8D6vKKMvTJy2NMxi7i74smnXiujZ9xqpYJxNKxJde+f+SUjWUSVDepnY2jtP9MNGhMxlYWUouDVR1TvZmPMt/Xpuqn/gjUluHVzPOlPYeq2pTQAdvaSd3SvxuCJCNPme93TqZvy5xaAtgUHHr4XFqruwAAANRJREFUyb8okC9aNTL+FuGI1SNjS1ePjNcRl40W5Y++8NcgRx/e+w8JS3M4TU0hiT4qHCbkecrqy8S7Stgg8NwX5LT7EN+fhLw8xhxt1y+1JQvs6xYoDeB9XfGkX7JAsoBzKYCTFyQLzGELpACew4uXVE8WSAE8Uz6Q5CYLzIIFUgDPgpHTEMkCM2WBFMAzZdkkN1lgFiyQAngWjJyGSBaYKQukAJ4py85nuWnus2aBFMCzZuo0ULLA9FsgBfD02zRJTBaYNQukAJ41U6eBkgWm3wL/BwAA//9JmjWXAAAABklEQVQDAKMMddVEV48JAAAAAElFTkSuQmCC" alt="GIST 환경·에너지공학과"><img class="mchar" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSLtmZjqsr3Ct+yXkOuEiOyngOqzte2VmeqzvCDsupDrpq3thLAg66y867Cp7Jq47J20Ij4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJlZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzVFRDNFOCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzFCOEZCOCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cGF0aCBkPSJNNjAgOCBDNjAgOCAyMiA1MiAyMiA3NiBhMzggMzggMCAwIDAgNzYgMCBDOTggNTIgNjAgOCA2MCA4WiIgZmlsbD0idXJsKCNlZykiLz4KPHBhdGggZD0iTTQwIDYwIHE2LTE0IDE0LTIwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIiBvcGFjaXR5PSIuNTUiLz4KPHBhdGggZD0iTTc4IDIyIHExNi02IDI0IDYgcS0xNCA4LTI0LTZaIiBmaWxsPSIjM0RCRTZCIi8+PHBhdGggZD0iTTgwIDIzIHExMCAwIDIwIDUiIHN0cm9rZT0iIzJBOEY0RSIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+CjxjaXJjbGUgY3g9IjQ3IiBjeT0iODAiIHI9IjUuNSIgZmlsbD0iIzEyMyIvPjxjaXJjbGUgY3g9IjczIiBjeT0iODAiIHI9IjUuNSIgZmlsbD0iIzEyMyIvPjxjaXJjbGUgY3g9IjQ5IiBjeT0iNzgiIHI9IjEuOCIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9Ijc1IiBjeT0iNzgiIHI9IjEuOCIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNTEgOTIgcTkgOCAxOCAwIiBzdHJva2U9IiMxMjMiIHN0cm9rZS13aWR0aD0iMy41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz4KPGNpcmNsZSBjeD0iMzgiIGN5PSI5MCIgcj0iNSIgZmlsbD0iI0ZGOEZBMyIgb3BhY2l0eT0iLjYiLz48Y2lyY2xlIGN4PSI4MiIgY3k9IjkwIiByPSI1IiBmaWxsPSIjRkY4RkEzIiBvcGFjaXR5PSIuNiIvPgo8L3N2Zz4=" alt="" alt="GIST 기계로봇공학과">
+  <div class="rule"></div>
+  <h1 id="title"></h1>
+  <p data-t="lead"></p>
+  <div class="chips">
+    <span class="chip"><span data-t="deadline"></span> <b id="dl">-</b></span>
+    <span class="chip"><span data-t="period"></span> <b id="range">-</b> <span data-t="acceptBasis"></span></span>
+  </div>
+</div></div>
+
+<main id="app">
+  <div class="notice" id="notice"></div>
+
+  <section class="card gate" id="gate" hidden>
+    <div class="ico-l">✉</div>
+    <h2 data-t="gateT"></h2>
+    <p class="desc" data-t="gateD"></p>
+    <div class="f" id="gEmailBox"><label data-t="gEmail"></label>
+      <div class="row2"><input id="gEmail" type="email" autocomplete="email" placeholder="id@gm.gist.ac.kr"><button class="btn red" type="button" id="gSend" onclick="sendCode()" data-t="gSend"></button></div>
+      <div class="err" id="gErr1"></div></div>
+    <div class="f" id="gCodeBox" hidden style="margin-top:14px"><label data-t="gCode"></label>
+      <div class="row2"><input id="gCode" class="code-in" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="······"><button class="btn red" type="button" id="gVerify" onclick="checkCode()" data-t="gVerify"></button></div>
+      <div class="hint" id="gHint"></div><div class="err" id="gErr2"></div></div>
+    <p class="gnote" data-t="gNote"></p>
+  </section>
+
+  <div class="sess" id="sess" hidden><div class="who"><span class="dot"></span><b id="sEmail"></b><span class="sub2" data-t="verified"></span></div><button class="linkbtn" type="button" onclick="logout()" data-t="logout"></button></div>
+  <div class="tabs" id="tabs" hidden><button type="button" data-tab="form" class="on" onclick="showTab('form')" data-t="tabForm"></button><button type="button" data-tab="mine" onclick="showTab('mine')" data-t="tabMine"></button></div>
+  <div id="mineArea" hidden></div>
+  <div id="formArea" hidden>
+
+  <section class="card">
+    <h2><span class="num">1</span><span data-t="s1"></span></h2>
+    <p class="desc" data-t="s1d"></p>
+    <div class="grid">
+      <div class="f" data-k="학번"><label><span data-t="sid"></span><span class="req">*</span></label><input id="학번" inputmode="numeric" maxlength="8" data-ph="sidPh"><div class="err" data-t="sidErr"></div></div>
+      <div class="f" data-k="성명"><label><span data-t="name"></span><span class="req">*</span></label><input id="성명" data-ph="namePh"><div class="err" data-t="nameErr"></div></div>
+      <div class="f" data-k="영문명"><label><span data-t="ename"></span><span class="req">*</span></label><input id="영문명" autocomplete="off" data-ph="enamePh"><div class="hint" data-t="enameHint"></div><div class="err" data-t="enameErr"></div></div>
+      <div class="f" data-k="과정"><label><span data-t="course"></span><span class="req">*</span></label>
+        <div class="seg two"><input type="radio" name="과정" id="c1" value="박사"><label for="c1" data-t="phd"></label><input type="radio" name="과정" id="c2" value="석박통합"><label for="c2" data-t="integ"></label></div>
+        <div class="err" data-t="courseErr"></div></div>
+      <div class="f" data-k="재학학기"><label><span data-t="sem"></span><span class="req">*</span> <span class="opt" data-t="semOpt"></span></label><input id="재학학기" inputmode="numeric" data-ph="semPh"><div class="err" data-t="semErr"></div></div>
+      <div class="f" data-k="지도교수"><label><span data-t="adv"></span><span class="req">*</span></label><select id="지도교수Sel"></select><input id="지도교수" data-ph="advPh" style="margin-top:8px;display:none"><div class="err" data-t="advErr"></div></div>
+      <div class="f full"><label><span data-t="email"></span> <span class="opt" data-t="emailVer"></span></label><input id="vEmail" readonly></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">＋</span><span data-t="sE"></span></h2>
+    <p class="desc" data-t="sEd"></p>
+    <div id="engBox"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">2</span><span data-t="s2"></span></h2>
+    <p class="desc" data-t="s2d"></p>
+    <div id="papers"></div>
+    <button class="add" type="button" onclick="addPaper()" data-t="addPaper"></button>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">3</span><span data-t="s3"></span></h2>
+    <p class="desc" data-t="s3d"></p>
+    <div id="patents"></div>
+    <button class="add" type="button" onclick="addPatent()" data-t="addPatent"></button>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">4</span><span data-t="s4"></span></h2>
+    <p class="desc" data-t="s4d"></p>
+    <div id="awards"></div>
+    <button class="add" type="button" onclick="addAward()" data-t="addAward"></button>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">5</span><span data-t="s5"></span></h2>
+    <div class="f" style="margin-bottom:14px"><label><span data-t="memo"></span><span class="opt" data-t="optional"></span></label><textarea id="메모" rows="2" data-ph="memoPh"></textarea></div>
+    <label class="check" id="agreeBox"><input type="checkbox" id="agree"><span data-t="agree"></span></label>
+  </section>
+  </div>
+  <footer id="contact"></footer>
+  <a class="adminlink" href="#admin">관리자</a>
+</main>
+
+<section id="admin" hidden>
+  <div class="card a-login" id="aLogin">
+    <h2><span class="num">⚙</span>담당자 화면</h2>
+    <p class="desc">학생 제출 목록과 증빙 PDF를 봅니다. 담당자 비밀번호를 넣어 주세요.</p>
+    <div class="f" id="aKeyBox"><input id="aKey" type="password" placeholder="관리자 비밀번호" autocomplete="current-password"><div class="err" id="aErr"></div></div>
+    <div style="display:flex;gap:8px;margin-top:14px"><button class="btn red" type="button" onclick="adminLogin()">들어가기</button><a class="btn" href="#">← 제출 화면</a></div>
+  </div>
+  <div id="aMain" hidden>
+    <div class="a-stats" id="aStats"></div>
+    <div class="card" style="padding:16px 18px">
+      <div class="a-top">
+        <div class="a-tools">
+          <input type="search" id="aQ" placeholder="이름·학번·지도교수·저널 검색" oninput="renderAdmin()">
+          <label class="check" style="font-size:13px"><input type="checkbox" id="aOld" onchange="renderAdmin()" style="width:16px;height:16px">이전 제출(대체됨)도 보기</label>
+        </div>
+        <div class="a-tools">
+          <button class="btn" type="button" onclick="loadAdmin()">↻ 새로고침</button>
+          <button class="btn" type="button" onclick="adminCsv()">⬇ 목록 CSV</button>
+          <button class="btn red" type="button" id="aRaw" onclick="adminRaw()" title="지금까지 들어온 유효 제출로 RAWDATA 엑셀을 바로 만듭니다">⬇ RAWDATA 엑셀(실시간)</button>
+          <a class="btn" id="aSheet" target="_blank" rel="noopener">구글 시트</a>
+          <button class="btn" type="button" onclick="adminLogout()">나가기</button>
+        </div>
+      </div>
+      <div class="sub" id="aNow" style="font-size:12px;color:var(--mute)"></div>
+    </div>
+    <div class="a-list" id="aList"></div>
+  </div>
+</section>
+
+<div class="viewer" id="viewer">
+  <div class="vbar"><b id="vName"></b><a class="btn sm" id="vOpen" target="_blank" rel="noopener">새 창</a><a class="btn sm" id="vDown">내려받기</a><button class="btn sm" type="button" onclick="closeViewer()">닫기 ✕</button></div>
+  <div class="vbody" id="vBody"></div>
+</div>
+
+<div class="bar"><div class="in">
+  <div class="sum"><span data-t="cntP"></span> <b id="sP">0</b> · <span data-t="cntT"></span> <b id="sT">0</b> · <span data-t="cntA"></span> <b id="sA">0</b></div>
+  <button class="go" id="go" onclick="send()" data-t="submit"></button>
+</div></div>
+
+<div class="modal" id="modal"><div class="box" id="box"></div></div>
+
+<template id="tPaper">
+  <div class="item">
+    <div class="item-h"><b><span data-t="paper"></span> <span class="n"></span></b><button class="del" type="button" data-t="del"></button></div>
+    <div class="grid">
+      <div class="f full" data-k="journal"><label><span data-t="journal"></span><span class="req">*</span></label><input name="journal" data-ph="journalPh"><div class="hint" data-t="journalHint"></div><div class="err" data-t="journalErr"></div></div>
+      <div class="f full"><label data-t="ptitle"></label><input name="title" data-ph="ptitlePh"></div>
+      <div class="f" data-k="doi"><label>DOI<span class="opt" data-t="ifAny"></span></label><input name="doi" placeholder="10.xxxx/xxxxx"><div class="err" data-t="doiErr"></div></div>
+      <div class="f" data-k="accept"><label><span data-t="accept"></span><span class="req">*</span> <span class="opt" data-t="acceptOpt"></span></label><input name="accept" type="date"><div class="err" data-t="acceptErr"></div></div>
+      <div class="f full" data-k="idx"><label><span data-t="idx"></span><span class="req">*</span></label>
+        <div class="seg two idx"><input type="radio" value="SCI"><label>SCI(E)<small data-t="idxSci"></small></label><input type="radio" value="SCOPUS"><label>SCOPUS<small data-t="idxSco"></small></label></div><div class="err" data-t="idxErr"></div></div>
+      <div class="f full" data-k="role"><label><span data-t="role"></span><span class="req">*</span></label>
+        <div class="seg">
+          <input type="radio" value="FA"><label>FA<small data-t="rFA"></small></label>
+          <input type="radio" value="co-FA"><label>co-FA<small data-t="rCoFA"></small></label>
+          <input type="radio" value="CA"><label>CA<small data-t="rCA"></small></label>
+          <input type="radio" value="ETC"><label>ETC<small data-t="rETC"></small></label>
+        </div><div class="err" data-t="roleErr"></div></div>
+      <div class="f" data-k="authors"><label><span data-t="authors"></span><span class="req">*</span></label><input name="authors" type="number" min="1" inputmode="numeric" data-ph="authorsPh"><div class="err" data-t="authorsErr"></div></div>
+      <div class="f full" data-k="file1"><label><span data-t="file1"></span><span class="req">*</span></label>
+        <label class="file"><input type="file" name="file1" accept="application/pdf,.pdf,image/*"><span class="ico">PDF</span><span class="t" data-t="file1Ph"></span></label><div class="err" data-t="fileErr"></div></div>
+      <div class="f full"><label><span data-t="file2"></span><span class="opt" data-t="file2Opt"></span></label>
+        <label class="file"><input type="file" name="file2" accept="application/pdf,.pdf,image/*"><span class="ico">＋</span><span class="t" data-t="choose"></span></label></div>
+    </div>
+  </div>
+</template>
+
+<template id="tEng">
+  <div class="item" style="border:0;padding:0;background:none">
+    <div class="item-h" style="display:none"><b><span class="n"></span></b><button class="del" type="button" data-t="del"></button></div>
+    <div class="grid">
+      <div class="f" data-k="gpa"><label><span data-t="gpa"></span><span class="req">*</span></label><input name="gpa" inputmode="decimal" placeholder="예) 3.85"><div class="hint" data-t="gpaHint"></div><div class="err" data-t="gpaErr"></div></div>
+      <div class="f" data-k="toeic"><label><span data-t="toeic"></span><span class="req">*</span></label><input name="toeic" inputmode="numeric" placeholder="예) 865"><div class="hint" data-t="toeicHint"></div><div class="err" data-t="toeicErr"></div></div>
+      <div class="f full" data-k="efile"><label><span data-t="efile"></span><span class="req">*</span></label>
+        <label class="file"><input type="file" name="efile" accept="application/pdf,.pdf,image/*"><span class="ico">PDF</span><span class="t" data-t="choose"></span></label><div class="err" data-t="fileErr"></div></div>
+    </div>
+  </div>
+</template>
+
+<template id="tPatent">
+  <div class="item">
+    <div class="item-h"><b><span data-t="patent"></span> <span class="n"></span></b><button class="del" type="button" data-t="del"></button></div>
+    <div class="grid">
+      <div class="f full" data-k="type"><label><span data-t="ptype"></span><span class="req">*</span></label>
+        <div class="seg two">
+          <input type="radio" value="국내등록"><label data-t="kReg"></label>
+          <input type="radio" value="국제등록"><label data-t="iReg"></label>
+        </div><div class="err" data-t="typeErr"></div></div>
+      <div class="f full"><label data-t="pname"></label><input name="name"></div>
+      <div class="f"><label data-t="pno"></label><input name="no" placeholder="10-2025-0000000"></div>
+      <div class="f"><label data-t="pdate"></label><input name="date" type="date"></div>
+      <div class="f" data-k="share"><label><span data-t="share"></span><span class="req">*</span></label><input name="share" type="number" min="1" max="100" inputmode="numeric" data-ph="sharePh"><div class="err" data-t="shareErr"></div></div>
+      <div class="f" data-k="file"><label><span data-t="pfile"></span><span class="req">*</span></label>
+        <label class="file"><input type="file" name="file" accept="application/pdf,.pdf,image/*"><span class="ico">PDF</span><span class="t" data-t="choose"></span></label><div class="err" data-t="fileErr"></div></div>
+    </div>
+  </div>
+</template>
+
+<template id="tAward">
+  <div class="item">
+    <div class="item-h"><b><span data-t="award"></span> <span class="n"></span></b><button class="del" type="button" data-t="del"></button></div>
+    <div class="grid">
+      <div class="f full" data-k="type"><label><span data-t="ptype"></span><span class="req">*</span></label>
+        <div class="seg two">
+          <input type="radio" value="국내"><label data-t="aDom"></label>
+          <input type="radio" value="해외"><label data-t="aInt"></label>
+        </div><div class="err" data-t="typeErr"></div></div>
+      <div class="f"><label data-t="aevent"></label><input name="event"></div>
+      <div class="f"><label data-t="aprize"></label><input name="prize" data-ph="aprizePh"></div>
+      <div class="f"><label data-t="adate"></label><input name="date" type="date"></div>
+      <div class="f" data-k="file"><label><span data-t="afile"></span><span class="req">*</span></label>
+        <label class="file"><input type="file" name="file" accept="application/pdf,.pdf,image/*"><span class="ico">PDF</span><span class="t" data-t="choose"></span></label><div class="err" data-t="fileErr"></div></div>
+    </div>
+  </div>
+</template>
+
+<script>
+/* ▼ 담당자 설정: Apps Script 웹앱 주소(…/exec)를 따옴표 안에 넣으면 제출이 켜집니다 ▼ */
+const API = 'https://script.google.com/macros/s/AKfycbyx4Lz2xdjbqFK9dfr6ut-3_ml-Ek9zUyxbldogCXiuL4bmhXQ8a23Z7dYswOIA3jl2/exec';
+/* ▲ ------------------------------------------------------------------------- ▲ */
+const CFG_TPL = null;
+let CFG = CFG_TPL || {title:"2026학년도 RA 박사우수재학생 장학금(연구실적)",titleEn:"2026 RA Scholarship for Outstanding Ph.D. Students",lang:'',deadline:'2026-12-04 23:59',closed:false,from:'',to:'',profs:[],
+  contact:"환경·에너지공학과 학과사무실 박근정 (T.2432)",contactEn:"Geunjeong Park, Dept. of Environment and Energy Engineering (ext. 2432)",
+  notice:"대상: 박사 3~8학기 · 석박통합 5~12학기 (SCI 주저자 논문 1편 이상). 논문 첫 페이지나 PDF, 학점·TOEIC 증빙을 꼭 올려 주세요.",
+  noticeEn:"Eligible: Ph.D. semesters 3\u20138, integrated semesters 5\u201312 (at least one SCI first-author paper). Upload the first page or PDF of each paper and your GPA/TOEIC evidence.",maxMb:15};
+const PREVIEW = !CFG_TPL && !API;
+const I18N = {
+ ko:{sE:'학점·영어 성적',sEd:'학점(평점평균)과 TOEIC 점수를 적고 증빙(성적증명서·TOEIC 성적표, 한 파일로)을 올려 주세요. 학점 3.0·TOEIC 750 미만은 대상에서 빠집니다.',gpa:'학점 (평점평균, 4.3 만점)',gpaHint:'성적증명서의 누계 평점평균',gpaErr:'0~4.3 사이 숫자로 적어 주세요.',toeic:'TOEIC 점수',toeicHint:'유효기간 안의 점수',toeicErr:'TOEIC 점수를 숫자로 적어 주세요.',efile:'증빙 (성적증명서 + TOEIC 성적표)',idx:'색인',idxSci:'Web of Science SCI·SCIE',idxSco:'SCOPUS에만 있음',idxErr:'SCI(E)인지 SCOPUS인지 골라 주세요.',brand:'GIST · 환경·에너지공학과',lead:'논문·특허·수상 실적을 입력하고 증빙을 올려 주세요. 담당자가 증빙과 JCR로 확인합니다.',deadline:'접수마감',period:'실적인정',acceptBasis:'(Accept 기준)',
+  s1:'기본 정보',s1d:'같은 학번으로 다시 제출하면 가장 마지막 제출만 반영됩니다.',sid:'학번',sidPh:'예) 20244040',sidErr:'숫자 8자리로 입력해 주세요.',name:'성명',namePh:'홍길동 (외국인은 여권 영문명)',nameErr:'성명을 입력해 주세요.',
+  ename:'논문 저자 표기 이름',enamePh:'예) Gildong Hong',enameHint:'논문 저자 목록에 적힌 그대로 써 주세요. 증빙에서 본인을 찾을 때 씁니다.',enameErr:'논문에 쓰는 영문 이름을 입력해 주세요.',course:'과정',phd:'박사',integ:'석박통합',courseErr:'과정을 골라 주세요.',sem:'재학학기',semOpt:'(이번 학기 기준)',semPh:'예) 5',semErr:'숫자로 입력해 주세요.',adv:'지도교수',advPh:'지도교수 성함',advErr:'지도교수를 입력해 주세요.',email:'이메일',optional:'(선택)',
+  s2:'SCI(E)·SCOPUS 논문',s2d:"Accept(또는 게재) 논문만 넣어 주세요. SCI(E)인지 SCOPUS인지 골라 주세요. 순위는 담당자가 JCR에서 찾습니다.",addPaper:'＋ 논문 추가',
+  s3:'특허',s3d:"등록된 특허만 인정됩니다(기술이전 포함 여부는 담당자가 확인). 국외 2점 · 국내 1점. 기여도는 발명자 지분(%)을 적어 주세요.",addPatent:'＋ 특허 추가',
+  s4:'학회·경진대회 수상',s4d:"국제(국내 개최 국제학회 포함) 2점 · 국내 1점.",addAward:'＋ 수상 추가',
+  s5:'확인',memo:'담당자에게 남길 말',memoPh:'예) 논문 2는 아직 게재 전이라 Accept 메일을 함께 올렸습니다.',agree:'입력한 실적과 증빙이 사실이며, 증빙(논문 PDF 등)이 장학금 심사에 쓰이는 것에 동의합니다.',
+  cntP:'논문',cntT:'특허',cntA:'수상',submit:'제출하기',paper:'논문',patent:'특허',award:'수상',del:'삭제',
+  journal:'저널명 (전체 이름)',journalPh:'예) Advanced Functional Materials',journalHint:'약어 대신 전체 이름으로 적어 주세요.',journalErr:'저널명을 입력해 주세요.',ptitle:'논문 제목',ptitlePh:'논문 제목',ifAny:'(있으면)',
+  accept:'게재날짜(or Accept날짜)',acceptOpt:'(일자가 불명확한 경우 1일로)',acceptErr:'게재날짜(또는 Accept날짜)를 입력해 주세요.',acceptFuture:'오늘 이후 날짜는 넣을 수 없습니다.',doiErr:'DOI 형식이 아닙니다. 예) 10.1016/j.ijmecsci.2026.110123',authorsMin2:'공동 제1저자·그 외 공저자는 저자가 2명 이상이어야 합니다.',dupPaper:'같은 논문을 두 번 넣었습니다.',journalAbbr:'약어 말고 저널 전체 이름으로 써 주세요. 예) Int. J. Mech. Sci. → International Journal of Mechanical Sciences',chkTitle:'제출 전에 한 번 더 확인해 주세요',chkOut:'논문 {i}: 게재(Accept) 날짜({d})가 실적인정 기간({r}) 밖입니다.',chkGo:'이대로 제출',chkFix:'고치러 가기',upPar:'증빙 올리는 중 ({i}/{n})',shrink:'사진 크기 줄이는 중…',role:'나의 역할',rFA:'제1저자',rCoFA:'공동 제1저자',rCA:'교신저자',rETC:'그 외 공저자',roleErr:'역할을 골라 주세요.',
+  authors:'총 저자 수 (본인 포함)',authorsPh:'예) 5',authorsErr:'저자 수를 입력해 주세요.',file1:'증빙 ① 논문PDF파일 또는 첫페이지 PDF·사진',file1Ph:'논문 PDF, 또는 저자·소속이 보이는 첫 페이지(PDF·사진)',fileErr:'증빙 파일을 올려 주세요.',
+  file2:'증빙 ② Accept 메일 등',file2Opt:'(게재 전이면)',choose:'파일 선택 (PDF 또는 사진)',
+  ptype:'구분',kApp:'국내 출원',kReg:'국내 등록',iApp:'국제 출원',iReg:'국제 등록',typeErr:'구분을 골라 주세요.',pname:'발명의 명칭',pno:'출원·등록번호',pdate:'출원·등록일',share:'나의 기여도(%)',sharePh:'예) 30',shareErr:'1~100 사이로 입력해 주세요.',pfile:'증빙 (출원서·등록증, 기여도 표시)',
+  aDom:'국내 학회·대회',aInt:'해외(국제) 학회·대회',aevent:'학회·대회명',aprize:'수상명',aprizePh:'예) Best Paper Award',adate:'수상일',afile:'증빙 (상장 PDF 또는 사진)',
+  contact:'문의',closed:'접수가 마감되었습니다',emptyP:'논문 실적이 없으면 비워 두세요.',emptyT:'특허 실적이 없으면 비워 두세요.',emptyA:'수상 실적이 없으면 비워 두세요.',
+  selProf:'선택해 주세요',etcProf:'목록에 없음 (직접 입력)',badType:'PDF 또는 사진(JPG·PNG 등) 파일만 올릴 수 있습니다.',badPhoto:'이 사진 형식은 이 브라우저에서 열리지 않습니다. JPG로 저장(또는 화면 캡처)해서 올려 주세요.',tooBig:'파일이 {mb}MB를 넘습니다. 첫 페이지만 따로 저장해 올려 주세요.',needOne:'논문·특허·수상 중 하나 이상 입력해 주세요.',
+  sending:'제출하는 중',uploading:'증빙 파일을 올리고 있습니다…',upN:'증빙 파일 {i} / {n} 올리는 중',saving:'접수 기록 중…',noClose:'창을 닫지 마세요.',
+  done:'제출되었습니다',rcpt:'접수번호',doneCnt:'논문 {p}편 · 특허 {t}건 · 수상 {a}건',doneNote:'{time} 접수 · 고칠 것이 있으면 같은 학번으로 다시 제출하세요(마지막 제출만 반영).',fail:'제출하지 못했습니다',back:'돌아가기',previewBanner:'미리보기 화면입니다 — 담당자가 접수를 열면 제출할 수 있습니다.',previewErr:'아직 접수가 열리지 않았습니다.',
+  gateT:'GIST 메일로 본인 확인',gateD:'제출과 조회는 본인만 할 수 있도록, 학교 메일로 받은 인증번호를 입력해 주세요.',gEmail:'GIST 메일 주소',gSend:'인증번호 받기',gCode:'메일로 받은 6자리 인증번호',gVerify:'확인',
+  gNote:'@gist.ac.kr 또는 @gm.gist.ac.kr 주소만 사용할 수 있습니다. 메일이 안 오면 스팸함을 확인해 주세요. 인증은 6시간 동안 유지됩니다.',gSent:'{email} 로 인증번호를 보냈습니다. (10분 안에 입력)',gResend:'다시 보내기',gBadEmail:'GIST 메일 주소를 입력해 주세요.',
+  verified:'인증됨',logout:'로그아웃',tabForm:'실적 제출',tabMine:'내 제출 내역',emailVer:'(본인 확인된 메일)',
+  mineEmpty:'아직 제출한 내역이 없습니다.',mineLoad:'불러오는 중…',mineLatest:'현재 반영되는 제출',mineOld:'이전 제출 (대체됨)',mineEdit:'이 내용으로 수정하기',mineHint:'수정하려면 내용을 불러와 고친 뒤 다시 제출하세요. 마지막 제출만 반영됩니다.',
+  keepFile:'이전에 낸 파일 사용 (바꾸려면 새 파일 선택)',view:'보기',none:'없음',loadedEdit:'이전 제출 내용을 불러왔습니다. 고친 뒤 다시 제출하세요.',sessionExp:'본인 확인이 만료되었습니다. 다시 인증해 주세요.'},
+ en:{sE:'GPA and English score',sEd:'Enter your GPA and TOEIC score and upload the evidence (transcript + TOEIC score report, in one file). Students below GPA 3.0 or TOEIC 750 are not eligible.',gpa:'GPA (out of 4.3)',gpaHint:'Cumulative GPA on your transcript',gpaErr:'Enter a number from 0 to 4.3.',toeic:'TOEIC score',toeicHint:'A valid (unexpired) score',toeicErr:'Enter your TOEIC score as a number.',efile:'Evidence (transcript + TOEIC report)',idx:'Index',idxSci:'Web of Science SCI / SCIE',idxSco:'SCOPUS only',idxErr:'Choose SCI(E) or SCOPUS.',brand:'GIST · Dept. of Environment and Energy Engineering',lead:'Enter your papers, patents and awards and upload the evidence. The office verifies them against the documents and JCR.',deadline:'Deadline',period:'Eligible period',acceptBasis:'(by acceptance date)',
+  s1:'Basic information',s1d:'If you submit again with the same student ID, only your latest submission counts.',sid:'Student ID',sidPh:'e.g. 20244040',sidErr:'Enter your 8-digit student ID.',name:'Name',namePh:'Name as in your passport',nameErr:'Enter your name.',
+  ename:'Name as it appears in your papers',enamePh:'e.g. Gildong Hong',enameHint:'Write it exactly as in the author list. Used to find you on the evidence.',enameErr:'Please enter the name used in your papers.',course:'Program',phd:'Ph.D.',integ:'Integrated M.S.–Ph.D.',courseErr:'Choose your program.',sem:'Semester',semOpt:'(current semester)',semPh:'e.g. 5',semErr:'Enter a number.',adv:'Advisor',advPh:"Advisor's name",advErr:'Enter your advisor.',email:'Email',optional:'(optional)',
+  s2:'SCI(E) / SCOPUS papers',s2d:"Only accepted (or published) papers. Choose SCI(E) or SCOPUS. The office looks up the JCR rank.",addPaper:'＋ Add a paper',
+  s3:'Patents',s3d:"Only registered patents count. International 2 points, domestic 1 point. Enter your inventor share (%).",addPatent:'＋ Add a patent',
+  s4:'Conference / competition awards',s4d:"International (incl. international conferences held in Korea) 2 points, domestic 1 point.",addAward:'＋ Add an award',
+  s5:'Confirmation',memo:'Note to the office',memoPh:'e.g. Paper 2 is not yet published, so I attached the acceptance email.',agree:'I confirm that the information and evidence are true, and agree that the evidence (paper PDFs etc.) will be used for the scholarship review.',
+  cntP:'Papers',cntT:'Patents',cntA:'Awards',submit:'Submit',paper:'Paper',patent:'Patent',award:'Award',del:'Remove',
+  journal:'Journal (full title)',journalPh:'e.g. Advanced Functional Materials',journalHint:'Use the full journal title, not the abbreviation.',journalErr:'Enter the journal title.',ptitle:'Paper title',ptitlePh:'Paper title',ifAny:'(if any)',
+  accept:'Publication date (or acceptance date)',acceptOpt:'(if the day is unknown, use the 1st)',acceptErr:'Enter the publication (or acceptance) date.',acceptFuture:'The date cannot be in the future.',doiErr:'This is not a DOI. e.g. 10.1016/j.ijmecsci.2026.110123',authorsMin2:'A co-first author or other co-author means at least 2 authors.',dupPaper:'The same paper is entered twice.',journalAbbr:'Please write the full journal title, not the abbreviation. e.g. Int. J. Mech. Sci. → International Journal of Mechanical Sciences',chkTitle:'Please check before submitting',chkOut:'Paper {i}: the publication (acceptance) date ({d}) is outside the eligible period ({r}).',chkGo:'Submit anyway',chkFix:'Go back and fix',upPar:'Uploading evidence ({i}/{n})',shrink:'Reducing photo size…',role:'Your role',rFA:'First author',rCoFA:'Co-first author',rCA:'Corresponding',rETC:'Other co-author',roleErr:'Choose your role.',
+  authors:'Total number of authors (incl. you)',authorsPh:'e.g. 5',authorsErr:'Enter the number of authors.',file1:'Evidence ① Paper PDF file or first page (PDF/photo)',file1Ph:'Paper PDF, or the first page showing authors (PDF or photo)',fileErr:'Upload the evidence file.',
+  file2:'Evidence ② Acceptance email etc.',file2Opt:'(if not yet published)',choose:'Choose file (PDF or photo)',
+  ptype:'Type',kApp:'Korean application',kReg:'Korean registration',iApp:'International application',iReg:'International registration',typeErr:'Choose the type.',pname:'Title of invention',pno:'Application / registration no.',pdate:'Filing / registration date',share:'Your share (%)',sharePh:'e.g. 30',shareErr:'Enter a number from 1 to 100.',pfile:'Evidence (application / certificate showing shares)',
+  aDom:'Domestic conference / competition',aInt:'International conference / competition',aevent:'Conference / competition',aprize:'Award title',aprizePh:'e.g. Best Paper Award',adate:'Award date',afile:'Evidence (certificate PDF or photo)',
+  contact:'Contact',closed:'Submissions are closed',emptyP:'Leave empty if you have no papers.',emptyT:'Leave empty if you have no patents.',emptyA:'Leave empty if you have no awards.',
+  selProf:'Select',etcProf:'Not in the list (type it)',badType:'Only PDF or photo (JPG, PNG etc.) files can be uploaded.',badPhoto:'This photo format cannot be opened in this browser. Please save it as JPG (or take a screenshot) and upload it.',tooBig:'The file is larger than {mb}MB. Please save and upload only the first page.',needOne:'Enter at least one paper, patent or award.',
+  sending:'Submitting',uploading:'Uploading evidence files…',upN:'Uploading file {i} of {n}',saving:'Saving your submission…',noClose:'Please do not close this window.',
+  done:'Submitted',rcpt:'Receipt no.',doneCnt:'{p} paper(s) · {t} patent(s) · {a} award(s)',doneNote:'Received {time}. To make changes, submit again with the same student ID (only the latest counts).',fail:'Submission failed',back:'Back',previewBanner:'Preview — submissions open once the office connects the form.',previewErr:'Submissions are not open yet.',
+  gateT:'Verify with your GIST email',gateD:'So that only you can submit and view your records, enter the code sent to your school email.',gEmail:'GIST email address',gSend:'Send code',gCode:'6-digit code from the email',gVerify:'Verify',
+  gNote:'Only @gist.ac.kr or @gm.gist.ac.kr addresses are accepted. Check your spam folder if the email does not arrive. Verification lasts 6 hours.',gSent:'A code was sent to {email} (valid for 10 minutes).',gResend:'Resend',gBadEmail:'Please enter your GIST email address.',
+  verified:'verified',logout:'Sign out',tabForm:'Submit',tabMine:'My submissions',emailVer:'(verified)',
+  mineEmpty:'You have no submissions yet.',mineLoad:'Loading…',mineLatest:'Current submission',mineOld:'Earlier submissions (replaced)',mineEdit:'Edit this submission',mineHint:'To make changes, load your submission, edit it and submit again. Only the latest one counts.',
+  keepFile:'Using your previously uploaded file (choose a new one to replace)',view:'View',none:'None',loadedEdit:'Your previous submission has been loaded. Edit and submit again.',sessionExp:'Your session has expired. Please verify again.'}
+};
+let LANG = CFG.lang || new URLSearchParams(location.search).get('lang') || ((navigator.language||'ko').toLowerCase().startsWith('ko') ? 'ko' : 'en');
+if (LANG !== 'en') LANG = 'ko';
+const T = (k, v={}) => String(I18N[LANG][k] ?? I18N.ko[k] ?? k).replace(/\{(\w+)\}/g, (_,x)=>v[x] ?? '');
+const $ = s => document.querySelector(s);
+let uid = 0;
+
+function translate(root){
+  root.querySelectorAll('[data-t]').forEach(e => e.textContent = T(e.dataset.t));
+  root.querySelectorAll('[data-ph]').forEach(e => e.placeholder = T(e.dataset.ph));
+  root.querySelectorAll('.file').forEach(b => { if (b.classList.contains('has')) { const f = b.querySelector('input').files[0]; if (f) b.querySelector('.t').textContent = f.name; } });
+  root.querySelectorAll('.file.keep').forEach(b => { b.querySelector('.t').textContent = T('keepFile'); });
+  if (typeof MINE !== 'undefined' && MINE && TAB === 'mine' && root === document) renderMine();
+}
+function setLang(l){
+  LANG = l; document.documentElement.lang = l;
+  $('#lk').classList.toggle('on', l==='ko'); $('#le').classList.toggle('on', l==='en');
+  translate(document);
+  $('#title').textContent = (l==='en' && CFG.titleEn) || CFG.title;
+  const n = PREVIEW ? T('previewBanner') : ((l==='en' && CFG.noticeEn) || CFG.notice); $('#notice').textContent = n; $('#notice').style.display = n ? '' : 'none';
+  const c = (l==='en' && CFG.contactEn) || CFG.contact; $('#contact').textContent = c ? T('contact') + ': ' + c + (CFG.contactEmail ? ' · ' + CFG.contactEmail : '') : '';
+  if (CFG._dlKo) $('#dl').textContent = l==='en' ? CFG._dlEn : CFG._dlKo;
+  fillProfs(); refresh();
+}
+function fillProfs(){
+  const sel = $('#지도교수Sel'); if (!CFG.profs.length){ sel.style.display='none'; $('#지도교수').style.display='block'; return; }
+  const cur = sel.value;
+  sel.innerHTML = `<option value="">${T('selProf')}</option>` + CFG.profs.map(p=>{ const [ko,en] = String(p).split('/').map(s=>s.trim()); const lab = LANG==='en' && en ? `${en} (${ko})` : (en ? `${ko} · ${en}` : ko); return `<option value="${esc(ko)}">${esc(lab)}</option>`; }).join('') + `<option value="__etc">${T('etcProf')}</option>`;
+  sel.value = cur;
+}
+
+function init(){
+  let dl = CFG.deadline || '-';
+  if (/^\d{4}-\d{2}-\d{2}T/.test(dl)) { const d = new Date(new Date(dl).getTime() + 9*3600e3); dl = d.toISOString().slice(0,16).replace('T',' '); }
+  const mm = String(dl).match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}:\d{2}))?/);
+  if (mm){ const dd = new Date(+mm[1], +mm[2]-1, +mm[3]); const wk = ['일','월','화','수','목','금','토'][dd.getDay()], wkE = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dd.getDay()];
+    CFG._dlKo = `${mm[1]}.${+mm[2]}.${+mm[3]}.(${wk})${mm[4] ? ' '+mm[4] : ''}`;
+    CFG._dlEn = `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+mm[2]-1]} ${+mm[3]}, ${mm[1]} (${wkE})${mm[4] ? ' '+mm[4]+' KST' : ''}`; }
+  $('#dl').textContent = dl;
+  $('#range').textContent = (CFG.from && CFG.to) ? CFG.from + ' ~ ' + CFG.to : '-';
+  const sel = $('#지도교수Sel');
+  sel.onchange = () => { const etc = sel.value==='__etc'; $('#지도교수').style.display = etc?'block':'none'; $('#지도교수').value = etc ? '' : sel.value; };
+  if (CFG.closed){
+    $('#app').innerHTML = '<section class="card closed"><h2 style="justify-content:center" data-t="closed"></h2><p class="desc" id="contact"></p></section>';
+    document.querySelector('.bar').style.display='none';
+  } else { mount('tEng','engBox'); addPaper(); }
+  setLang(LANG);
+  authInit();
+}
+
+function mount(tplId, boxId){
+  const node = document.getElementById(tplId).content.firstElementChild.cloneNode(true);
+  node.querySelectorAll('.seg').forEach(seg => {
+    const nm = 'r' + (++uid);
+    seg.querySelectorAll('input').forEach((inp,i) => { const id = nm+'_'+i; inp.name = nm; inp.id = id; inp.nextElementSibling.htmlFor = id; });
+  });
+  node.querySelectorAll('.file input').forEach(inp => inp.onchange = async () => {
+    const f = inp.files[0], box = inp.parentElement, img = f && isImg(f);
+    if (f && !img && !/\.pdf$/i.test(f.name) && f.type !== 'application/pdf'){ alert(T('badType')); inp.value=''; }
+    else if (f && f.size > (img ? 40 : CFG.maxMb)*1024*1024){ alert(T('tooBig',{mb:img ? 40 : CFG.maxMb})); inp.value=''; }
+    else if (img && !/^image\/(jpeg|png)$/.test(f.type) && !(await canDecode(f))){ alert(T('badPhoto')); inp.value=''; }
+    const ok = !!inp.files[0];
+    if (ok) { delete box.dataset.keep; box.classList.remove('keep'); }
+    box.classList.toggle('has', ok); box.querySelector('.t').textContent = ok ? inp.files[0].name : T('choose'); box.querySelector('.ico').textContent = ok ? '✓' : 'PDF';
+  });
+  node.querySelector('.del').onclick = () => { node.remove(); refresh(); };
+  node.addEventListener('input', () => node.querySelectorAll('.bad').forEach(b=>b.classList.remove('bad')));
+  translate(node);
+  document.getElementById(boxId).appendChild(node); refresh();
+}
+const addPaper = () => mount('tPaper','papers');
+const addPatent = () => mount('tPatent','patents');
+const addAward = () => mount('tAward','awards');
+
+function refresh(){
+  [['papers','sP','emptyP'],['patents','sT','emptyT'],['awards','sA','emptyA']].forEach(([b,s,msg])=>{
+    const box = document.getElementById(b); if (!box) return;
+    const items = box.querySelectorAll('.item');
+    items.forEach((it,i)=>it.querySelector('.n').textContent = i+1);
+    document.getElementById(s).textContent = items.length;
+    let e = box.querySelector('.empty');
+    if (!items.length){ if(!e){ e = document.createElement('div'); e.className='empty'; box.appendChild(e); } e.textContent = T(msg); }
+    else if (e) e.remove();
+  });
+}
+
+function val(item, name){ const el = item.querySelector(`[name="${name}"]`); return el ? el.value.trim() : ''; }
+function radio(item){ const c = item.querySelector('.seg:not(.idx) input:checked'); return c ? c.value : ''; }
+function radioIdx(item){ const c = item.querySelector('.seg.idx input:checked'); return c ? c.value : ''; }
+function fileOf(item, name){ const el = item.querySelector(`input[type=file][name="${name}"]`); return el && el.files[0]; }
+function keepOf(item, name){ const el = item.querySelector(`input[type=file][name="${name}"]`); return el ? (el.closest('.file').dataset.keep || '') : ''; }
+function bad(scope, key, msg){ const f = scope.querySelector(`.f[data-k="${key}"]`); if (!f) return f; f.classList.add('bad');
+  const e = f.querySelector('.err'); if (e){ if (!e.dataset.t0) e.dataset.t0 = e.dataset.t; e.dataset.t = msg || e.dataset.t0; e.textContent = T(e.dataset.t); } return f; }
+const normDoi = d => String(d||'').trim().replace(/^https?:\/\/(dx\.)?doi\.org\//i,'').replace(/^doi:\s*/i,'');
+const isAbbr = j => /\b[A-Z][a-z]{0,5}\.(\s|$)/.test(j) && (j.match(/\./g)||[]).length >= 2;
+const parseK = t => { const m = String(t||'').match(/(\d{4})\D+(\d{1,2})\D+(\d{1,2})/); return m ? `${m[1]}-${m[2].padStart(2,'0')}-${m[3].padStart(2,'0')}` : ''; };
+
+function collect(){
+  document.querySelectorAll('.bad').forEach(b=>b.classList.remove('bad'));
+  const errs = []; const P = {lang: LANG};
+  P.학번 = $('#학번').value.trim(); if(!/^\d{8}$/.test(P.학번)) errs.push(bad(document,'학번'));
+  P.성명 = $('#성명').value.trim(); if(!P.성명) errs.push(bad(document,'성명'));
+  P.영문명 = $('#영문명').value.trim(); if(!/[A-Za-z]/.test(P.영문명)) errs.push(bad(document,'영문명'));
+  const c = document.querySelector('input[name="과정"]:checked'); P.과정 = c ? c.value : ''; if(!P.과정) errs.push(bad(document,'과정'));
+  P.재학학기 = $('#재학학기').value.trim(); if(!/^\d{1,2}$/.test(P.재학학기)) errs.push(bad(document,'재학학기'));
+  P.지도교수 = $('#지도교수').value.trim(); if(!P.지도교수) errs.push(bad(document,'지도교수'));
+  P.메모 = $('#메모').value.trim();
+  const files = [], seenP = {};
+  { const it = document.querySelector('#engBox .item'); if (it){
+    P.학점 = val(it,'gpa'); P.TOEIC = val(it,'toeic');
+    if(!(+P.학점 > 0 && +P.학점 <= 4.3)) errs.push(bad(it,'gpa'));
+    if(!(/^\d{2,3}$/.test(P.TOEIC) && +P.TOEIC <= 990)) errs.push(bad(it,'toeic'));
+    const f = fileOf(it,'efile'), kk = keepOf(it,'efile'); if (f) files.push([P,'engFile',f]); else if (kk) P.engFile = kk; else errs.push(bad(it,'efile')); } }
+  P.papers = [...document.querySelectorAll('#papers .item')].map(it => {
+    const x = {journal:val(it,'journal'), title:val(it,'title'), doi:normDoi(val(it,'doi')), accept:val(it,'accept'), role:radio(it), authors:val(it,'authors')};
+    if(!x.journal) errs.push(bad(it,'journal')); else if(isAbbr(x.journal)) errs.push(bad(it,'journal','journalAbbr'));
+    if(!x.accept) errs.push(bad(it,'accept')); else if(x.accept > TODAY) errs.push(bad(it,'accept','acceptFuture'));
+    if(!x.role) errs.push(bad(it,'role'));
+    x.idx = radioIdx(it); if(!x.idx) errs.push(bad(it,'idx'));
+    if(x.doi && !/^10\.\d{4,9}\/\S+$/.test(x.doi)) errs.push(bad(it,'doi'));
+    if(!(+x.authors>=1 && Number.isInteger(+x.authors))) errs.push(bad(it,'authors'));
+    else if((x.role==='co-FA'||x.role==='ETC') && +x.authors<2) errs.push(bad(it,'authors','authorsMin2'));
+    const key = (x.doi || x.title).toLowerCase().replace(/[^a-z0-9가-힣]/g,'');
+    if(key && seenP[key]) errs.push(bad(it,'journal','dupPaper')); seenP[key] = 1;
+    const f1 = fileOf(it,'file1'), f2 = fileOf(it,'file2'), k1 = keepOf(it,'file1'), k2 = keepOf(it,'file2');
+    if(!f1 && !k1) errs.push(bad(it,'file1'));
+    if(f1) files.push([x,'file1',f1]); else if(k1) x.file1 = k1;
+    if(f2) files.push([x,'file2',f2]); else if(k2) x.file2 = k2; return x;
+  });
+  P.patents = [...document.querySelectorAll('#patents .item')].map(it => {
+    const x = {type:radio(it), name:val(it,'name'), no:val(it,'no'), date:val(it,'date'), share:val(it,'share')};
+    if(!x.type) errs.push(bad(it,'type')); if(!(+x.share>0 && +x.share<=100)) errs.push(bad(it,'share'));
+    const f = fileOf(it,'file'), k = keepOf(it,'file'); if(f) files.push([x,'file',f]); else if(k) x.file = k; else errs.push(bad(it,'file')); return x;
+  });
+  P.awards = [...document.querySelectorAll('#awards .item')].map(it => {
+    const x = {type:radio(it), event:val(it,'event'), prize:val(it,'prize'), date:val(it,'date')};
+    if(!x.type) errs.push(bad(it,'type'));
+    const f = fileOf(it,'file'), k = keepOf(it,'file'); if(f) files.push([x,'file',f]); else if(k) x.file = k; else errs.push(bad(it,'file')); return x;
+  });
+  return {P, files, errs: errs.filter(Boolean)};
+}
+
+const TODAY = new Date(Date.now() + 9*3600e3).toISOString().slice(0,10);
+/* 휴대폰 사진(JPG·PNG)이 크면 글자가 충분히 보이는 크기(긴 변 2200px)로 줄여 올림 — PDF는 그대로 */
+/* 사진: JPG·PNG 말고 다른 형식(HEIC·WEBP 등)은 JPG로 바꾸고, 큰 사진은 줄여서 올림 */
+function isImg(f){ return /^image\//.test(f.type) || /\.(jpe?g|png|heic|heif|webp|gif|bmp|tiff?)$/i.test(f.name); }
+async function canDecode(f){ try { const b = await createImageBitmap(f); b.close && b.close(); return true; } catch(e){ return false; } }
+async function shrink(f){
+  if (!isImg(f)) return f;
+  const keep = /^image\/(jpeg|png)$/.test(f.type) && /\.(jpe?g|png)$/i.test(f.name);
+  if (keep && f.size < 1.5*1024*1024) return f;
+  try {
+    const bmp = await createImageBitmap(f); const k = Math.min(1, 2200 / Math.max(bmp.width, bmp.height));
+    const c = document.createElement('canvas'); c.width = Math.round(bmp.width*k); c.height = Math.round(bmp.height*k);
+    const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0,0,c.width,c.height); g.drawImage(bmp, 0, 0, c.width, c.height);
+    const b = await new Promise(ok => c.toBlob(ok, 'image/jpeg', 0.88));
+    const out = b && (!keep || b.size < f.size) ? new File([b], f.name.replace(/\.\w+$/,'') + '.jpg', {type:'image/jpeg'}) : f;
+    if (out.size > CFG.maxMb*1024*1024) throw new Error(T('tooBig',{mb:CFG.maxMb}));
+    return out;
+  } catch(e){ if (keep && f.size <= CFG.maxMb*1024*1024) return f; throw new Error(e && /MB/.test(e.message) ? e.message : T('badPhoto')); }
+}
+/* 실적인정 기간 밖 Accept 날짜 등 — 막지는 않고 한 번 더 확인 */
+function softChecks(P){
+  const a = parseK(CFG.from), b = parseK(CFG.to), w = [];
+  if (a && b) P.papers.forEach((x,i) => { if (x.accept && (x.accept < a || x.accept > b)) w.push(T('chkOut',{i:i+1,d:x.accept,r:CFG.from+' ~ '+CFG.to})); });
+  return w;
+}
+function askWarn(w){
+  return new Promise(ok => {
+    const box = $('#box'); $('#modal').classList.add('on');
+    box.innerHTML = `<h3>${T('chkTitle')}</h3>${w.map(x=>`<p style="text-align:left">• ${esc(x)}</p>`).join('')}<p style="margin-top:16px;display:flex;gap:8px;justify-content:center"><button class="btn" id="wFix">${T('chkFix')}</button><button class="go" id="wGo">${T('chkGo')}</button></p>`;
+    $('#wFix').onclick = () => { $('#modal').classList.remove('on'); ok(false); };
+    $('#wGo').onclick = () => ok(true);
+  });
+}
+function readUrl(f){ return new Promise((ok,no)=>{ const r=new FileReader(); r.onload=()=>ok(r.result); r.onerror=no; r.readAsDataURL(f); }); }
+function gs(fn, ...a){
+  if (CFG_TPL && window.google && google.script) return new Promise((ok,no)=>{ const run = google.script.run.withSuccessHandler(ok).withFailureHandler(no); run[fn](...a); });
+  if (!API) return Promise.reject(new Error(T('previewErr')));
+  const once = () => fetch(API, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:fn, args:a})}).then(r => r.json());
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  // 일시적인 서버 오류(로그인 확인 실패·네트워크)는 한 번 더 시도 — 학생이 다시 인증하거나 처음부터 다시 내는 일을 줄임
+  return once().catch(() => sleep(1500).then(once)).then(j => {
+    if (!j.ok && String(j.error||'').startsWith('LOGIN:') && AUTH.exp > Date.now()) return sleep(1500).then(once);
+    return j;
+  }).then(j => { if (j.ok) return j.data; const m = String(j.error||''); if (m.startsWith('LOGIN:')) { onExpired(); throw new Error(T('sessionExp')); } throw new Error(m); });
+}
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+async function send(){
+  const {P, files, errs} = collect();
+  if (errs.length){ errs[0].scrollIntoView({behavior:'smooth', block:'center'}); return; }
+  if (!P.papers.length && !P.patents.length && !P.awards.length){ alert(T('needOne')); return; }
+  if (!$('#agree').checked){ $('#agreeBox').scrollIntoView({behavior:'smooth',block:'center'}); $('#agreeBox').style.color='var(--red)'; return; }
+  const warn = softChecks(P);
+  if (warn.length && !(await askWarn(warn))) return;
+  $('#go').disabled = true;
+  const box = $('#box'); $('#modal').classList.add('on');
+  box.innerHTML = `<h3>${T('sending')}</h3><p id="pm">${T('uploading')}</p><div class="prog"><i id="pb"></i></div><p style="font-size:12px">${T('noClose')}</p>`;
+  try{
+    // 증빙을 3개씩 동시에 올림 (한 개씩보다 약 2배 빠름)
+    let done = 0, next = 0;
+    const show = () => { $('#pm').textContent = T('upPar',{i:done,n:files.length}); $('#pb').style.width = Math.round(done/(files.length+1)*100)+'%'; };
+    show();
+    const worker = async () => { while (next < files.length){ const [obj,key,f0] = files[next++];
+      const f = await shrink(f0);
+      obj[key] = await gs('uploadFile', {name:f.name}, await readUrl(f), AUTH.token); done++; show(); } };
+    await Promise.all([worker(), worker(), worker()]);
+    $('#pm').textContent = T('saving');
+    const r = await gs('submit', P, AUTH.token);
+    MINE = null; $('#go').disabled = false; $('#agree').checked = false;
+    $('#pb').style.width = '100%';
+    box.innerHTML = `<div class="big">✓</div><h3>${T('done')}</h3><p>${T('rcpt')} <b>${esc(r.id)}</b></p><p>${T('doneCnt',{p:r.papers,t:r.patents,a:r.awards})}</p><p style="margin-top:12px;font-size:13px;color:var(--mute)">${T('doneNote',{time:esc(r.time)})}</p><p style="margin-top:16px"><button class="go" onclick="document.getElementById('modal').classList.remove('on');showTab('mine')">${T('tabMine')}</button></p>`;
+  }catch(e){
+    box.innerHTML = `<h3>${T('fail')}</h3><p>${esc((e && e.message) || e)}</p><p style="margin-top:14px"><button class="go" onclick="document.getElementById('modal').classList.remove('on')">${T('back')}</button></p>`;
+    $('#go').disabled = false;
+  }
+}
+
+/* ================= 학생 본인 확인 · 내 제출 내역 ================= */
+let AUTH = { token:'', email:'', exp:0 };
+let MINE = null, TAB = 'form';
+const ls_get = k => { try { return localStorage.getItem(k) || ''; } catch(e) { return ''; } };
+const ls_set = (k,v) => { try { v ? localStorage.setItem(k,v) : localStorage.removeItem(k); } catch(e) {} };
+function authInit(){
+  try { const a = JSON.parse(ls_get('envAuth') || '{}'); if (a.token && a.exp > Date.now()) AUTH = a; } catch(e) {}
+  renderAuth();
+}
+function renderAuth(){
+  const ok = !!AUTH.token && !PREVIEW && !CFG.closed;
+  $('#gate').hidden = ok || PREVIEW || CFG.closed;
+  $('#sess').hidden = !ok; $('#tabs').hidden = !ok;
+  if (ok){ $('#sEmail').textContent = AUTH.email; $('#vEmail').value = AUTH.email; showTab(TAB); }
+  else { $('#formArea').hidden = !(PREVIEW && !CFG.closed); $('#mineArea').hidden = true; }
+  updateBar();
+}
+function updateBar(){
+  const show = location.hash !== '#admin' && !CFG.closed && !$('#formArea').hidden;
+  document.querySelector('.bar').style.display = show ? '' : 'none';
+}
+function showTab(t){
+  TAB = t;
+  document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
+  $('#formArea').hidden = t !== 'form'; $('#mineArea').hidden = t !== 'mine';
+  updateBar();
+  if (t === 'mine') loadMine();
+  else if (!MINE) loadMine(true);
+}
+let resendT = 0;
+async function sendCode(){
+  const email = $('#gEmail').value.trim().toLowerCase();
+  $('#gErr1').textContent=''; $('#gEmailBox').classList.remove('bad');
+  if (!/^[^@\s]+@(gm\.)?gist\.ac\.kr$/.test(email)){ $('#gErr1').textContent = T('gBadEmail'); $('#gEmailBox').classList.add('bad'); return; }
+  const b = $('#gSend'); b.disabled = true;
+  try{
+    await gs('requestCode', email, LANG);
+    $('#gCodeBox').hidden = false; $('#gHint').textContent = T('gSent',{email}); $('#gCode').focus();
+    let s = 60; clearInterval(resendT);
+    resendT = setInterval(()=>{ s--; b.textContent = s>0 ? `${T('gResend')} (${s})` : T('gResend'); if (s<=0){ clearInterval(resendT); b.disabled=false; } }, 1000);
+  }catch(e){ $('#gErr1').textContent = (e && e.message) || e; $('#gEmailBox').classList.add('bad'); b.disabled = false; }
+}
+async function checkCode(){
+  const email = $('#gEmail').value.trim().toLowerCase(), code = $('#gCode').value.replace(/\D/g,'');
+  $('#gErr2').textContent=''; $('#gCodeBox').classList.remove('bad');
+  if (code.length !== 6){ $('#gCodeBox').classList.add('bad'); return; }
+  const b = $('#gVerify'); b.disabled = true;
+  try{
+    const r = await gs('verifyCode', email, code);
+    AUTH = { token:r.token, email:r.email, exp: Date.now() + (r.hours||6)*3600e3 - 60e3 };
+    ls_set('envAuth', JSON.stringify(AUTH)); MINE = null; TAB = 'form';
+    renderAuth();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }catch(e){ $('#gErr2').textContent = (e && e.message) || e; $('#gCodeBox').classList.add('bad'); }
+  b.disabled = false;
+}
+function logout(){ AUTH = {token:'',email:'',exp:0}; MINE = null; ls_set('envAuth',''); $('#gCode').value=''; $('#gCodeBox').hidden = true; renderAuth(); }
+function onExpired(){ if (AUTH.token){ logout(); alert(T('sessionExp')); } }
+document.addEventListener('keydown', e => { if (e.key==='Enter' && e.target.id==='gEmail') sendCode(); if (e.key==='Enter' && e.target.id==='gCode') checkCode(); });
+
+async function loadMine(silent){
+  if (!AUTH.token) return;
+  const box = $('#mineArea');
+  if (!silent) box.innerHTML = `<section class="card empty-a">${T('mineLoad')}</section>`;
+  try{ MINE = await gs('myData', AUTH.token); }catch(e){ if (!silent) box.innerHTML = `<section class="card empty-a">${esc((e&&e.message)||e)}</section>`; return; }
+  // 이미 낸 학번은 고정
+  const cur = MINE.submissions.find(s => s['상태']==='유효') || MINE.submissions[0];
+  if (cur){ const sid = $('#학번'); if (!sid.value) sid.value = cur['학번']; sid.readOnly = true; }
+  if (!silent || TAB==='mine') renderMine();
+}
+function renderMine(){
+  const box = $('#mineArea'); const subs = (MINE && MINE.submissions) || [];
+  if (!subs.length){ box.innerHTML = `<section class="card empty-a">${T('mineEmpty')}</section>`; return; }
+  const ev = (u,label,s) => u ? `<button class="btn sm evbtn" type="button" data-s="mine" data-u="${esc(u)}" data-l="${esc(s['학번']+' '+label)}">📄 ${T('view')}</button>` : `<span class="sub2">${T('none')}</span>`;
+  const card = (s, latest) => `<section class="card">
+    <div class="mine-head"><div><div style="font-weight:800;font-size:17px">${esc(s['성명'])} <span class="sub2">${esc(s['학번'])}${s['논문영문명'] ? ' · '+esc(s['논문영문명']) : ''}</span></div>
+      <div class="sub2">${T('rcpt')} ${esc(s['접수번호'])} · ${esc(s['접수시각'])}</div></div>
+      <div>${latest ? '<span class="pill ok">'+T('mineLatest')+'</span>' : '<span class="pill old">'+T('mineOld')+'</span>'}</div></div>
+    <div class="sub2" style="margin-bottom:10px">${esc(s['과정'])} · ${esc(s['지도교수'])}</div>
+    <h4 style="margin:12px 0 6px">${T('s2')} ${s.papers.length}</h4>
+    ${s.papers.length ? `<div class="a-wrap"><table class="a-tbl"><tr><th>#</th><th>${T('journal')}</th><th>${T('accept')}</th><th>${T('role')}</th><th>${T('authors')}</th><th></th></tr>${s.papers.map(p=>`<tr><td>${esc(p['순번'])}</td><td><b>${esc(p['저널명(학생)'])}</b><div class="sub2">${esc(p['논문제목'])}</div></td><td>${esc(p['Accept일'])}</td><td>${esc(p['역할(학생)'])}</td><td>${esc(p['저자수(학생)'])}</td><td>${ev(p['증빙1'],'논문'+p['순번'],s)} ${p['증빙2']?ev(p['증빙2'],'논문'+p['순번']+'_추가',s):''}</td></tr>`).join('')}</table></div>` : `<div class="sub2">${T('none')}</div>`}
+    <h4 style="margin:12px 0 6px">${T('s3')} ${s.patents.length}</h4>
+    ${s.patents.length ? `<div class="a-wrap"><table class="a-tbl"><tr><th>#</th><th>${T('ptype')}</th><th>${T('pname')}</th><th>${T('share')}</th><th></th></tr>${s.patents.map(p=>`<tr><td>${esc(p['순번'])}</td><td>${esc(p['구분'])}</td><td>${esc(p['명칭'])}<div class="sub2">${esc(p['출원·등록번호'])} ${esc(p['일자'])}</div></td><td>${esc(p['기여도(%)'])}%</td><td>${ev(p['증빙'],'특허'+p['순번'],s)}</td></tr>`).join('')}</table></div>` : `<div class="sub2">${T('none')}</div>`}
+    <h4 style="margin:12px 0 6px">${T('s4')} ${s.awards.length}</h4>
+    ${s.awards.length ? `<div class="a-wrap"><table class="a-tbl"><tr><th>#</th><th>${T('ptype')}</th><th>${T('aevent')}</th><th></th></tr>${s.awards.map(p=>`<tr><td>${esc(p['순번'])}</td><td>${esc(p['구분'])}</td><td>${esc(p['학회·대회명'])}<div class="sub2">${esc(p['수상명'])} ${esc(p['일자'])}</div></td><td>${ev(p['증빙'],'수상'+p['순번'],s)}</td></tr>`).join('')}</table></div>` : `<div class="sub2">${T('none')}</div>`}
+    ${latest ? `<div style="margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn red" type="button" onclick="editMine()">${T('mineEdit')}</button><span class="sub2">${T('mineHint')}</span></div>` : ''}
+  </section>`;
+  const latest = subs.find(s => s['상태']==='유효'), olds = subs.filter(s => s !== latest);
+  box.innerHTML = (latest ? card(latest, true) : '') + (olds.length ? `<details class="card" style="padding:16px 20px"><summary style="cursor:pointer;font-weight:700">${T('mineOld')} ${olds.length}</summary>${olds.map(s=>card(s,false)).join('')}</details>` : '');
+}
+const fid = u => (String(u||'').match(/[-\w]{25,}/) || [''])[0];
+function setKeep(item, name, url){
+  const el = item.querySelector(`input[type=file][name="${name}"]`); if (!el || !url) return;
+  const box = el.closest('.file'); box.dataset.keep = fid(url); box.classList.add('keep');
+  box.querySelector('.t').textContent = T('keepFile'); box.querySelector('.ico').textContent = '↺';
+}
+function setRadio(item, v){ const r = [...item.querySelectorAll('.seg input')].find(x => x.value === v); if (r) r.checked = true; }
+function editMine(){
+  const s = MINE && MINE.submissions.find(x => x['상태']==='유효'); if (!s) return;
+  $('#학번').value = s['학번']; $('#성명').value = s['성명']; $('#영문명').value = s['논문영문명'] || ''; $('#재학학기').value = s['재학학기'] || '';
+  const c = [...document.querySelectorAll('input[name="과정"]')].find(x => x.value === s['과정']); if (c) c.checked = true;
+  const sel = $('#지도교수Sel'); const has = [...sel.options].some(o => o.value === s['지도교수']);
+  if (has){ sel.value = s['지도교수']; $('#지도교수').style.display='none'; } else { sel.value = '__etc'; $('#지도교수').style.display='block'; }
+  $('#지도교수').value = s['지도교수']; $('#메모').value = s['학생메모'] || '';
+  { const it = document.querySelector('#engBox .item'); if (it){ it.querySelector('[name=gpa]').value = s['학점'] || ''; it.querySelector('[name=toeic]').value = s['TOEIC'] || ''; if (s['성적증빙']) setKeep(it,'efile',s['성적증빙']); } }
+  ['papers','patents','awards'].forEach(b => document.getElementById(b).innerHTML = '');
+  s.papers.forEach(p => { addPaper(); const it = [...document.querySelectorAll('#papers .item')].pop();
+    it.querySelector('[name=journal]').value = p['저널명(학생)']; it.querySelector('[name=title]').value = p['논문제목'];
+    it.querySelector('[name=doi]').value = p['DOI']; it.querySelector('[name=accept]').value = p['Accept일'];
+    it.querySelector('[name=authors]').value = p['저자수(학생)']; setRadio(it, p['역할(학생)']); setRadio(it, p['색인(학생)'] || ''); setKeep(it,'file1',p['증빙1']); setKeep(it,'file2',p['증빙2']); });
+  s.patents.forEach(p => { addPatent(); const it = [...document.querySelectorAll('#patents .item')].pop();
+    setRadio(it, p['구분']); it.querySelector('[name=name]').value = p['명칭']; it.querySelector('[name=no]').value = p['출원·등록번호'];
+    it.querySelector('[name=date]').value = p['일자']; it.querySelector('[name=share]').value = p['기여도(%)']; setKeep(it,'file',p['증빙']); });
+  s.awards.forEach(p => { addAward(); const it = [...document.querySelectorAll('#awards .item')].pop();
+    setRadio(it, p['구분']); it.querySelector('[name=event]').value = p['학회·대회명']; it.querySelector('[name=prize]').value = p['수상명'];
+    it.querySelector('[name=date]').value = p['일자']; setKeep(it,'file',p['증빙']); });
+  refresh(); showTab('form');
+  const n = $('#notice'); n.style.display=''; n.textContent = T('loadedEdit');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ================= 담당자(관리자) 화면 ================= */
+let ADM = { key:'', data:null };
+const ss_get = k => { try { return sessionStorage.getItem(k) || ''; } catch(e) { return ''; } };
+const ss_set = (k,v) => { try { v ? sessionStorage.setItem(k,v) : sessionStorage.removeItem(k); } catch(e) {} };
+function route(){
+  const isA = location.hash === '#admin';
+  $('#app').hidden = isA; updateBar();
+  $('#admin').hidden = !isA; document.querySelector('.chips').style.display = isA ? 'none' : '';
+  $('#title').textContent = isA ? '장학금 연구실적 — 담당자 화면' : ((LANG==='en' && CFG.titleEn) || CFG.title);
+  document.querySelector('.lang').style.display = isA ? 'none' : '';
+  document.querySelector('[data-t=lead]').textContent = isA ? '학생 제출 목록을 보고 증빙 PDF를 바로 열어 봅니다.' : T('lead');
+  if (isA){ ADM.key = ADM.key || ss_get('admKey'); if (ADM.key && !ADM.data) loadAdmin(); else showAdmin(!!ADM.data); }
+}
+function showAdmin(inside){ $('#aLogin').hidden = inside; $('#aMain').hidden = !inside; }
+async function adminLogin(){ ADM.key = $('#aKey').value.trim(); if (!ADM.key) return; await loadAdmin(); }
+function adminLogout(){ ADM = {key:'', data:null}; ss_set('admKey',''); $('#aKey').value=''; showAdmin(false); }
+async function loadAdmin(){
+  $('#aErr').textContent=''; $('#aKeyBox').classList.remove('bad');
+  $('#aNow').textContent = '불러오는 중…';
+  try{
+    ADM.data = await gs('adminList', ADM.key); ss_set('admKey', ADM.key);
+    $('#aSheet').href = ADM.data.sheetUrl; showAdmin(true); renderAdmin();
+  }catch(e){
+    ADM.data = null; ss_set('admKey',''); showAdmin(false);
+    $('#aErr').textContent = (e && e.message) || String(e); $('#aKeyBox').classList.add('bad');
+  }
+}
+const nItems = s => s.papers.length + s.patents.length + s.awards.length;
+function renderAdmin(){
+  const D = ADM.data; if (!D) return;
+  const all = D.students, valid = all.filter(s => s['상태']==='유효');
+  const sum = k => valid.reduce((a,s)=>a+s[k].length,0);
+  const last = valid[0] ? valid[0]['접수시각'] : '-';
+  $('#aStats').innerHTML = [['제출 학생',valid.length+'명'],['논문',sum('papers')+'편'],['특허',sum('patents')+'건'],['수상',sum('awards')+'건'],['최근 접수',last.slice(5,16)||'-']]
+    .map(([a,b])=>`<div class="a-stat"><span>${a}</span><b>${esc(b)}</b></div>`).join('');
+  $('#aNow').textContent = `${D.now} 기준 · 같은 학번은 마지막 제출만 '유효' · 행을 누르면 실적과 증빙이 열립니다`;
+  const q = $('#aQ').value.trim().toLowerCase(), old = $('#aOld').checked;
+  const list = all.filter(s => (old || s['상태']==='유효') && (!q || JSON.stringify(s).toLowerCase().includes(q)));
+  if (!list.length){ $('#aList').innerHTML = '<div class="card empty-a">아직 제출이 없습니다.</div>'; return; }
+  $('#aList').innerHTML = list.map((s,i) => {
+    const pil = s['상태']==='유효' ? '<span class="pill ok">유효</span>' : '<span class="pill old">대체됨</span>';
+    const nSub = all.filter(x => x['학번']===s['학번']).length;
+    const rep = nSub > 1 ? `<span class="pill old" title="같은 학번으로 ${nSub}번 제출됨 — '이전 제출도 보기'로 비교">제출 ${nSub}회</span>` : '';
+    const ev = (u,label) => u ? `<button class="btn sm evbtn" type="button" data-u="${esc(u)}" data-l="${esc(s['학번']+' '+s['성명']+' '+label)}">📄 ${label}</button>` : '<span class="sub">없음</span>';
+    const papers = s.papers.map(p => `<tr><td>${esc(p['순번'])}</td><td><b>${esc(p['저널명(학생)'])}</b><div class="sub">${esc(p['논문제목'])}</div><div class="sub">${esc(p['DOI'])}</div></td><td>${esc(p['Accept일'])}</td><td>${esc(p['역할(학생)'])}</td><td>${esc(p['저자수(학생)'])}</td><td>${ev(p['증빙1'],'증빙')} ${p['증빙2']?ev(p['증빙2'],'추가'):''}</td><td>${p['IF(JCR)']?esc(p['순위']+'/'+p['전체']+' · IF '+p['IF(JCR)']):'<span class="sub">검증 전</span>'}</td></tr>`).join('');
+    const pats = s.patents.map(p => `<tr><td>${esc(p['순번'])}</td><td>${esc(p['구분'])}</td><td>${esc(p['명칭'])}<div class="sub">${esc(p['출원·등록번호'])} ${esc(p['일자'])}</div></td><td>${esc(p['기여도(%)'])}%</td><td>${ev(p['증빙'],'증빙')}</td></tr>`).join('');
+    const aws = s.awards.map(p => `<tr><td>${esc(p['순번'])}</td><td>${esc(p['구분'])}</td><td>${esc(p['학회·대회명'])}<div class="sub">${esc(p['수상명'])} ${esc(p['일자'])}</div></td><td>${ev(p['증빙'],'증빙')}</td></tr>`).join('');
+    return `<div class="a-row" id="ar${i}">
+      <div class="a-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="nm">${esc(s['성명'])}</div><div class="sub">${esc(s['학번'])}${s['논문영문명'] ? ' · '+esc(s['논문영문명']) : ''}</div><div class="sub" style="font-size:11.5px">${esc(s['이메일']||'')}</div></div>
+        <div>${pil}${rep}<span class="pill">${esc(s['과정'])}</span><span class="sub">${esc(s['재학학기'] ? s['재학학기']+'학기' : '')}</span></div>
+        <div><span class="sub">지도교수</span><div>${esc(s['지도교수'])}</div></div>
+        <div class="hide-m"><span class="pill">논문 ${s.papers.length}</span><span class="pill">특허 ${s.patents.length}</span><span class="pill">수상 ${s.awards.length}</span></div>
+        <div class="hide-m sub">${esc(s['접수시각'])}</div>
+        <div class="hide-m sub">${esc(s['접수번호'])}</div>
+        <div class="chev">›</div>
+      </div>
+      <div class="a-body">
+        ${s['학생메모'] ? `<div class="notice" style="margin-bottom:12px">학생 메모: ${esc(s['학생메모'])}</div>` : ''}
+        <h4>SCI 논문 ${s.papers.length}편</h4>
+        ${s.papers.length ? `<div class="a-wrap"><table class="a-tbl"><tr><th>#</th><th>저널 / 제목</th><th>Accept</th><th>역할</th><th>저자수</th><th>증빙</th><th>JCR</th></tr>${papers}</table></div>` : '<div class="sub">없음</div>'}
+        <h4>특허 ${s.patents.length}건</h4>
+        ${s.patents.length ? `<div class="a-wrap"><table class="a-tbl"><tr><th>#</th><th>구분</th><th>명칭</th><th>기여도</th><th>증빙</th></tr>${pats}</table></div>` : '<div class="sub">없음</div>'}
+        <h4>수상 ${s.awards.length}건</h4>
+        ${s.awards.length ? `<div class="a-wrap"><table class="a-tbl"><tr><th>#</th><th>구분</th><th>학회·대회 / 수상</th><th>증빙</th></tr>${aws}</table></div>` : '<div class="sub">없음</div>'}
+      </div></div>`;
+  }).join('');
+}
+let VURL = '';
+async function viewFile(url, label, src){
+  const v = $('#viewer'); v.classList.add('on'); $('#vName').textContent = label + ' — 불러오는 중…'; $('#vBody').innerHTML = '';
+  try{
+    const f = src === 'mine' ? await gs('myFile', AUTH.token, url) : await gs('adminFile', ADM.key, url);
+    const bin = atob(f.data), arr = new Uint8Array(bin.length); for (let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+    // 파일 내용으로 종류를 다시 확인 — PDF·PNG·JPG만 화면에 띄움
+    const kind = (arr[0]===0x25&&arr[1]===0x50&&arr[2]===0x44&&arr[3]===0x46) ? 'application/pdf'
+               : (arr[0]===0x89&&arr[1]===0x50&&arr[2]===0x4E&&arr[3]===0x47) ? 'image/png'
+               : (arr[0]===0xFF&&arr[1]===0xD8&&arr[2]===0xFF) ? 'image/jpeg' : '';
+    if (VURL) URL.revokeObjectURL(VURL);
+    VURL = URL.createObjectURL(new Blob([arr], {type: kind || 'application/octet-stream'}));
+    $('#vName').textContent = f.name; $('#vDown').href = VURL; $('#vDown').download = f.name;
+    $('#vOpen').style.display = kind ? '' : 'none'; $('#vOpen').href = kind ? VURL : '#';
+    if (!kind) { $('#vBody').innerHTML = '<p style="padding:30px">PDF·JPG·PNG가 아닌 파일이라 화면에 띄우지 않습니다. 필요하면 내려받아 확인하세요.</p>'; return; }
+    if (kind.startsWith('image/')) { $('#vBody').innerHTML = `<img src="${VURL}" alt="">`; return; }
+    try { await renderPdf(arr); } catch(err) { $('#vBody').innerHTML = `<iframe src="${VURL}" title="증빙" sandbox></iframe>`; }
+  }catch(e){ $('#vName').textContent = label; $('#vBody').innerHTML = `<p style="padding:30px">${esc((e && e.message) || e)}</p>`; }
+}
+function loadPdfJs(){
+  if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+  return new Promise((ok,no)=>{ const s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    s.onload=()=>{ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; ok(pdfjsLib); }; s.onerror=no; document.head.appendChild(s); });
+}
+async function renderPdf(bytes){
+  const lib = await loadPdfJs();
+  const doc = await lib.getDocument({data: bytes}).promise;
+  const body = $('#vBody'); body.innerHTML = ''; body.style.display = 'block'; body.style.background = '#E9EBEA'; body.style.padding = '14px';
+  const w = Math.min(body.clientWidth - 28, 1000);
+  for (let i = 1; i <= doc.numPages; i++){
+    const page = await doc.getPage(i), vp0 = page.getViewport({scale:1}), sc = w / vp0.width, dpr = window.devicePixelRatio || 1;
+    const vp = page.getViewport({scale: sc * dpr}), c = document.createElement('canvas');
+    c.width = vp.width; c.height = vp.height; c.style.width = (vp.width/dpr) + 'px'; c.style.display = 'block'; c.style.margin = '0 auto 12px'; c.style.background = '#fff'; c.style.boxShadow = '0 2px 10px rgba(0,0,0,.12)';
+    body.appendChild(c); await page.render({canvasContext: c.getContext('2d'), viewport: vp}).promise;
+  }
+}
+function closeViewer(){ const b=$('#vBody'); b.style.display=''; b.style.background=''; b.style.padding=''; $('#viewer').classList.remove('on'); $('#vBody').innerHTML=''; }
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeViewer(); });
+/*RAW-START*/
+/* ── 관리자: RAWDATA 엑셀 실시간 내려받기 (build_rawdata.py · sheet_to_json.py와 같은 규칙) ── */
+const RAW = (() => {
+  const ROLE_CR = {FA:2, CA:2, 'co-FA':1.5, ETC:1}, ROLE_IF = {FA:1, CA:1, 'co-FA':0.8, ETC:0.5};
+  const PATENT = [['국제등록','국제특허 등록',8,1],['국제출원','국제특허 출원',4,2],['국내등록','국내특허 등록',6,3],['국내출원','국내특허 출원',3,3]];
+  const AWARD = [['해외','해외학회 및 경진대회\n(국제 학회, 기준점수:1점)',1.0],['국내','국내학회 및 경진대회\n(국내 학회, 기준점수:0.5점)',0.5]];
+  const s = x => x == null ? '' : String(x).trim();
+  const num = x => { const t = String(x == null ? '' : x).replace(/,/g,'').trim(); if (t === '') return null; const v = Number(t); return isFinite(v) ? v : null; };
+  const asDate = x => { const m = s(x).match(/(\d{4})\D(\d{1,2})\D(\d{1,2})/); return m ? `${m[1]}-${m[2].padStart(2,'0')}-${m[3].padStart(2,'0')}` : null; };
+  const normRole = x => ({FA:'FA','CO-FA':'co-FA',COFA:'co-FA',CA:'CA',ETC:'ETC'})[s(x).toUpperCase().replace(/[ ]/g,'').replace(/_/g,'-')] || '';
+  const doiKey = (doi, title) => s(doi).toLowerCase().replace(/^https?:\/\/(dx\.)?doi\.org\//,'').trim() || s(title).toLowerCase().replace(/[^a-z0-9가-힣]/g,'');
+  const nameKey = x => { const t = s(x).toLowerCase().replace(/[-‐]/g,'').replace(/[^a-z ]/g,' '); const w = t.split(/\s+/).filter(Boolean);
+    return [...new Set(w.filter(v => v.length > 1 || w.length <= 2))].sort().join(' '); };
+  const authorPos = (name, authors) => { const k = nameKey(name); if (!k) return 0;
+    const lst = s(authors).split(/\s*[,;]\s*|\s+and\s+/).filter(a => a.trim());
+    const hit = lst.map((a,i) => nameKey(a) === k ? i+1 : 0).filter(Boolean); return hit.length === 1 ? hit[0] : (hit.length ? -1 : 0); };
+  const cats = t => s(t).split(';').map(p => p.match(/^\s*(.+?)\s+(\d+)\s*\/\s*(\d+)\s*$/)).filter(Boolean).map(m => [m[1].trim(), +m[2], +m[3]]);
+  const confirmed = r => ['O','○','확인','Y'].includes(s(r['담당자확정']).toUpperCase());
+  const sid_ = x => s(x).replace(/^'+/,'');
+  const fl = F => F.map(([a,b,c]) => ({내용:a, 학생:b, 확인:c}));
+  const r2 = v => Math.round((v + Number.EPSILON) * 100) / 100;   // 소수 둘째자리 반올림 (엑셀 ROUND와 같게)
+
+  /* adminList 결과 → build_rawdata 입력 형태 (sheet_to_json.main 과 같은 판단) */
+  function toData(D, cfg){
+    const dFrom = asDate(cfg.from), dTo = asDate(cfg.to);
+    const prevKeys = new Set((D.prev || []).map(p => sid_(p['학번']) + '|' + doiKey(p['DOI'], p['논문제목'])));
+    const valid = r => s(r['상태']) === '유효';
+    const st = {};
+    D.students.filter(valid).forEach(r => { const id = sid_(r['학번']);
+      st[id] = {학번:id, 성명:s(r['성명']), 영문명:s(r['논문영문명']), 학점: num(r['학점']), TOEIC: num(r['TOEIC']), 성적증빙: s(r['성적증빙']), 과정:s(r['과정']), 재학학기:s(r['재학학기']), 지도교수:s(r['지도교수']), papers:[], patents:[], awards:[], flags:[]}; });
+    const years = new Set(), seen = new Set();
+    const items = k => D.students.flatMap(x => x[k] || []).filter(valid);
+    items('papers').forEach(r => {
+      const id = sid_(r['학번']), S = st[id]; if (!S) return;
+      const F = [], roleSt = normRole(r['역할(학생)']), roleAi = normRole(r['역할(AI)']);
+      const nSt = num(r['저자수(학생)']), nAi = num(r['저자수(AI)']), rank = num(r['순위']), tot = num(r['전체']), iff = num(r['IF(JCR)']);
+      if (!s(r['증빙1'])) F.push(['증빙 파일 없음','','']);
+      if (!roleAi) F.push(['AI가 증빙에서 역할을 확인하지 못함 — 증빙 직접 확인', roleSt, s(r['AI근거'])]);
+      else if (roleSt && roleAi !== roleSt) F.push(['역할 불일치 (학생 입력 ≠ 증빙)', roleSt, `${roleAi} · ${s(r['AI근거'])}`]);
+      if (nAi == null) F.push(['AI가 저자 수를 세지 못함', s(r['저자수(학생)']), '']);
+      else if (nSt && Math.trunc(nAi) !== Math.trunc(nSt)) F.push(['저자 수 불일치 (학생 입력 ≠ 증빙)', Math.trunc(nSt), `${Math.trunc(nAi)}명 · ${s(r['저자목록(AI)']).slice(0,120)}`]);
+      const al = s(r['저자목록(AI)']).split(/\s*[,;]\s*/).filter(a => a.trim());
+      if (al.length && nAi != null && al.length !== Math.trunc(nAi)) F.push(['저자 수(AI)와 저자목록(AI) 이름 수가 다름', Math.trunc(nAi), `목록 ${al.length}명`]);
+      const pos = al.length && S.영문명 ? authorPos(S.영문명, r['저자목록(AI)']) : null;
+      if (pos === 0) F.push(['증빙 저자목록에서 본인 영문 이름을 찾지 못함', S.영문명, s(r['저자목록(AI)']).slice(0,120)]);
+      else if (pos === -1) F.push(['증빙 저자목록에 같은 이름이 둘 이상', S.영문명, '']);
+      else if (pos) {
+        if (roleAi === 'FA' && pos !== 1) F.push(['역할(AI)=FA인데 본인이 첫 번째 저자가 아님', `${pos}번째`, roleAi]);
+        if ((roleAi === 'co-FA' || roleAi === 'ETC') && pos === 1) F.push([`역할(AI)=${roleAi}인데 본인이 첫 번째 저자`, '1번째', roleAi]);
+      }
+      if (tot && rank){
+        const pct = num(r['상위%']);
+        if (pct != null && Math.abs(pct - rank/tot*100) > 0.01) F.push(['상위% 계산이 순위/전체와 다름 (순위/전체로 계산)', pct, (rank/tot*100).toFixed(2)]);
+        const better = cats(r['다른카테고리']).filter(c => c[1]/c[2] < rank/tot - 1e-9);
+        if (better.length){ const b = better.reduce((a,c) => c[1]/c[2] < a[1]/a[2] ? c : a);
+          F.push(['더 높은 순위 카테고리가 있음 — 최상위카테고리 다시 확인', `${s(r['최상위카테고리'])} ${Math.trunc(rank)}/${Math.trunc(tot)}`, `${b[0]} ${b[1]}/${b[2]}`]); }
+        if (iff == null) F.push(['IF(JCR) 비어 있음', '', s(r['JCR정식명'])]);
+      }
+      const js = s(r['JCR상태']);
+      if (s(r['색인(학생)']) === 'SCOPUS') {} else if (!tot || !['일치',''].includes(js)) F.push([`JCR 확인 필요 (${js || '미검색'})`, s(r['저널명(학생)']), s(r['JCR정식명']) || 'JCR에서 찾지 못함']);
+      else if (!js) F.push(['JCR 조회 결과 상태 미기재', '', s(r['JCR정식명'])]);
+      const acc = asDate(r['Accept일']), accAi = asDate(r['Accept일(AI)']);
+      if (acc && accAi && acc !== accAi) F.push(['Accept일 불일치 (학생 입력 ≠ 증빙)', acc, accAi]);
+      [['학생 입력', acc], ['증빙', accAi !== acc ? accAi : null]].forEach(([lb, d]) => {
+        if (d && dFrom && dTo && !(dFrom <= d && d <= dTo)) F.push([`Accept일이 실적인정 기간 밖 (${lb})`, d, `${dFrom}~${dTo}`]); });
+      const k = doiKey(r['DOI'], r['논문제목']);
+      if (k && seen.has(id+'|'+k)) F.push(['같은 논문을 두 번 입력', s(r['DOI']), '']);
+      if (k && prevKeys.has(id+'|'+k)) F.push(['이전 포상에서 이미 인정된 논문 (1회 인정)', s(r['DOI']), '이전인정논문 시트']);
+      seen.add(id+'|'+k);
+      if (s(r['JCR연도'])) years.add(s(r['JCR연도']));
+      S.papers.push({저널명: s(r['JCR정식명']) || s(r['저널명(학생)']), 학생저널명: s(r['저널명(학생)']), 제목: s(r['논문제목']), DOI: s(r['DOI']),
+        색인: s(r['색인(학생)']) || 'SCI', 게재일: acc || s(r['Accept일']), AI게재일: accAi || '', 역할: roleAi || roleSt, 학생역할: roleSt,
+        저자수: Math.trunc(nAi || nSt || 0) || null, 학생저자수: nSt, AI근거: s(r['AI근거']),
+        순위: rank ? Math.trunc(rank) : null, 전체: tot ? Math.trunc(tot) : null, IF: iff, JCR연도: s(r['JCR연도']),
+        카테고리: s(r['최상위카테고리']), 다른카테고리: s(r['다른카테고리']), 증빙: s(r['증빙1']), flags: confirmed(r) ? [] : fl(F)});
+    });
+    items('patents').forEach(r => { const S = st[sid_(r['학번'])]; if (!S) return;
+      let sh = num(r['기여도(%)']) || 0; sh = sh > 1 ? sh/100 : sh;
+      const F = []; if (!s(r['증빙'])) F.push(['증빙 파일 없음','','']);
+      const ai = s(r['AI확인']), pc = Math.round(sh*100) + '%';
+      if (!ai) F.push(['AI 확인 전 / 증빙 직접 확인', pc, '']); else if (/불일치|확인 필요/.test(ai)) F.push(['증빙과 입력 다름', `${s(r['구분'])} ${pc}`, ai]);
+      S.patents.push({구분: s(r['구분']), 기여도: sh, 명칭: s(r['명칭']) || s(r['출원·등록번호']), flags: confirmed(r) ? [] : fl(F)}); });
+    items('awards').forEach(r => { const S = st[sid_(r['학번'])]; if (!S) return;
+      const F = []; if (!s(r['증빙'])) F.push(['증빙 파일 없음','','']);
+      const ai = s(r['AI확인']);
+      if (!ai) F.push(['AI 확인 전 / 증빙 직접 확인', s(r['구분']), '']); else if (/불일치|확인 필요/.test(ai)) F.push(['증빙과 입력 다름', s(r['구분']), ai]);
+      S.awards.push({구분: s(r['구분']), 명칭: `${s(r['학회·대회명'])} ${s(r['수상명'])}`.trim(), flags: confirmed(r) ? [] : fl(F)}); });
+    if (years.size > 1){ const mx = [...years].sort().pop();
+      Object.values(st).forEach(S => S.papers.forEach(p => { if (p.JCR연도 && p.JCR연도 !== mx) p.flags.push({내용:'JCR 연도가 다른 논문과 다름 (최신판으로 다시 조회)', 학생:p.JCR연도, 확인:mx}); })); }
+    return {평가명: s(cfg.title) || '박사과정 재학생 연구우수장학금', JCR연도: [...years].sort().join(', ') || '[확인 필요]',
+            students: Object.values(st).sort((a,b) => a.성명 < b.성명 ? -1 : a.성명 > b.성명 ? 1 : 0)};
+  }
+
+/* ===== 학과별 RA 장학금 점수 계산 + RAWDATA 엑셀 (환경·신소재 공용, {"id": "env", "ko": "환경·에너지공학과", "committee": "학과 책임교육(소)위원회(12월)", "lines": ["■ 환경·에너지공학과 RA 박사우수재학생 포상 배점기준 — 이 파일 계산에 쓴 규칙", "대상: 박사 3~8학기, 석박통합 5~12학기 · SCI 주저자(FA) 논문 1편 이상 · 학점 3.0 이상 · TOEIC 750 이상", "제외: 2월 졸업예정자, 연차초과자, 기수혜자, 총장·롯데·NRF 글로벌박사 장학생 (담당자 확인) · 품행 요건(2025.12.17. 신설)", "SCI(E) 논문 = JCR 상위% 기본점수(5% 이내 6 / 10% 이내 4 / 25% 이내 2 / 그 밖 1) × 역할(FA 1.0 / co-FA 0.8 / 공저자 0.25)", "  · 교신저자(CA)는 별도 기준이 없어 공저자 0.25로 계산하고 더블체크에 표시", "SCOPUS 논문 = 편당 1점 (2026-11-11 담당자 결정)", "특허 = 등록(기술이전) 국외 2점 · 국내 1점 / 수상 = 국제 2점 · 국내 1점", "학점 = 4.3 이상 2점 · 3.7 이상 1점 / 영어 = TOEIC 900 이상 2점 · 800 이상 1점", "동점이면 SCI → 특허 → 수상 → 학점 → 영어 점수 순으로 높은 사람", "실적 인정기간: 설정 시트의 실적인정 시작~끝 (Accept일 기준) · 소수점 둘째 자리 반올림", "근거: 학과 「우수졸업자, RA 박사우수재학생 포상기준(안)」·책임교육(소)위원회 기록"]} 로 갈림) ===== */
+  const RULE = {"id": "env", "ko": "환경·에너지공학과", "committee": "학과 책임교육(소)위원회(12월)", "lines": ["■ 환경·에너지공학과 RA 박사우수재학생 포상 배점기준 — 이 파일 계산에 쓴 규칙", "대상: 박사 3~8학기, 석박통합 5~12학기 · SCI 주저자(FA) 논문 1편 이상 · 학점 3.0 이상 · TOEIC 750 이상", "제외: 2월 졸업예정자, 연차초과자, 기수혜자, 총장·롯데·NRF 글로벌박사 장학생 (담당자 확인) · 품행 요건(2025.12.17. 신설)", "SCI(E) 논문 = JCR 상위% 기본점수(5% 이내 6 / 10% 이내 4 / 25% 이내 2 / 그 밖 1) × 역할(FA 1.0 / co-FA 0.8 / 공저자 0.25)", "  · 교신저자(CA)는 별도 기준이 없어 공저자 0.25로 계산하고 더블체크에 표시", "SCOPUS 논문 = 편당 1점 (2026-11-11 담당자 결정)", "특허 = 등록(기술이전) 국외 2점 · 국내 1점 / 수상 = 국제 2점 · 국내 1점", "학점 = 4.3 이상 2점 · 3.7 이상 1점 / 영어 = TOEIC 900 이상 2점 · 800 이상 1점", "동점이면 SCI → 특허 → 수상 → 학점 → 영어 점수 순으로 높은 사람", "실적 인정기간: 설정 시트의 실적인정 시작~끝 (Accept일 기준) · 소수점 둘째 자리 반올림", "근거: 학과 「우수졸업자, RA 박사우수재학생 포상기준(안)」·책임교육(소)위원회 기록"]};
+  const pctOf = p => (p.순위 && p.전체) ? p.순위 / p.전체 * 100 : null;
+  function paperPts(p){   // [점수, 계산식 설명, 확인필요 문구]
+    if (RULE.id === 'env'){
+      if (p.색인 === 'SCOPUS') return [1, 'SCOPUS 편당 1점', ''];
+      const pc = pctOf(p); if (pc == null) return [0, 'JCR 순위 없음 → 0 (확인 필요)', 'JCR 순위 없음'];
+      const base = pc <= 5 ? 6 : pc <= 10 ? 4 : pc <= 25 ? 2 : 1;
+      const w = {FA:1, 'co-FA':0.8, ETC:0.25, CA:0.25}[p.역할];
+      if (w == null) return [0, '역할 미확인', '역할 미확인'];
+      return [r2(base * w), `상위 ${r2(pc)}% → 기본 ${base}점 × ${p.역할} ${w}`, p.역할 === 'CA' ? '교신저자 배점(공저자 0.25 적용) 학과 확인' : ''];
+    }
+    const pc = pctOf(p); if (pc == null) return [0, 'JCR 순위 없음 → 0 (확인 필요)', 'JCR 순위 없음'];
+    const rk = pc <= 10 ? 5 : pc <= 20 ? 3 : pc <= 30 ? 2 : 1;
+    const isFA = p.역할 === 'FA' || p.역할 === 'co-FA';
+    if (!p.역할) return [0, '역할 미확인', '역할 미확인'];
+    return [r2((isFA ? 4 : 1) * rk), `상위 ${r2(pc)}% → 순위점수 ${rk} × ${isFA ? 'FA 4' : 'ETC 1'}`, p.역할 === 'co-FA' ? '공동 제1저자를 FA(4)로 계산 — 학과 확인' : (p.역할 === 'CA' ? '교신저자를 ETC(1)로 계산 — 학과 확인' : '')];
+  }
+  function patentPts(x){
+    const intl = /국제|국외|해외/.test(x.구분), reg = /등록/.test(x.구분);
+    if (!reg) return [0, '출원은 인정 안 됨', ''];
+    if (RULE.id === 'env') return [intl ? 2 : 1, intl ? '국외 등록 2점' : '국내 등록 1점', '기술이전 여부 확인'];
+    return [intl ? 4 : 2, intl ? '국외 등록 4점(1개국만)' : '국내 등록 2점', '교수 외 최대 기여 학생인지 확인'];
+  }
+  function awardPts(x){
+    if (RULE.id === 'env') return x.구분 === '해외' ? [2, '국제 수상 2점'] : [1, '국내 수상 1점'];
+    return [1, '대외 수상 1점'];
+  }
+  const gpaPts = g => g == null ? 0 : g >= 4.3 ? 2 : g >= 3.7 ? 1 : 0;
+  const engPts = t => t == null ? 0 : t >= 900 ? 2 : t >= 800 ? 1 : 0;
+  function score(S){
+    const P = S.papers.map(paperPts), T = S.patents.map(patentPts), A = S.awards.map(awardPts);
+    const sum = a => r2(a.reduce((x, y) => x + y[0], 0));
+    const o = {paper: sum(P), patent: sum(T), award: sum(A), P, T, A, gpa: 0, eng: 0, warn: []};
+    if (RULE.id === 'env'){
+      o.gpa = gpaPts(S.학점); o.eng = engPts(S.TOEIC);
+      const sem = +S.재학학기 || 0, integ = /통합/.test(S.과정);
+      if (sem && (integ ? (sem < 5 || sem > 12) : (sem < 3 || sem > 8))) o.warn.push(`대상 학기 밖 (${integ ? '통합 5~12' : '박사 3~8'}학기)`);
+      if (!S.papers.some(p => p.색인 !== 'SCOPUS' && (p.역할 === 'FA' || p.역할 === 'co-FA'))) o.warn.push('SCI 주저자(FA) 논문 1편 이상 요건 확인');
+      if (S.학점 != null && S.학점 < 3.0) o.warn.push('학점 3.0 미만 — 제외 대상');
+      if (S.TOEIC != null && S.TOEIC < 750) o.warn.push('TOEIC 750 미만 — 제외 대상');
+      if (S.학점 == null) o.warn.push('학점 미입력');
+      if (S.TOEIC == null) o.warn.push('TOEIC 미입력');
+      if ((S.학점 != null || S.TOEIC != null) && !S.성적증빙) o.warn.push('학점·TOEIC 증빙 없음');
+    } else {
+      const sem = +S.재학학기 || 0, integ = /통합/.test(S.과정);
+      if (sem && sem < (integ ? 7 : 5)) o.warn.push(`연구실적 부문은 ${integ ? '통합 7' : '박사 5'}학기 이상 — 3·4학기는 성적우수 부문`);
+    }
+    o.total = r2(o.paper + o.patent + o.award + o.gpa + o.eng);
+    return o;
+  }
+  const total = S => { const o = score(S); return [o.patent + o.award, o.paper]; };
+  const paperScore = p => [paperPts(p)[0], 0];
+
+  function build(data, ExcelJS, stamp){
+    const wb = new ExcelJS.Workbook(); wb.creator = 'scholarship-form'; wb.calcProperties.fullCalcOnLoad = true;
+    const thin = {style:'thin', color:{argb:'FFBFBFBF'}}, BOX = {left:thin,right:thin,top:thin,bottom:thin};
+    const FILL = h => ({type:'pattern', pattern:'solid', fgColor:{argb:'FF' + h}});
+    const head = (ws, row, fill) => { const r = ws.addRow(row); r.eachCell(c => { c.font = {name:'맑은 고딕', size:9, bold:true}; c.fill = FILL(fill || 'DCE6F1'); c.border = BOX; c.alignment = {horizontal:'center', vertical:'middle', wrapText:true}; }); r.height = 30; return r; };
+    const body = (ws, row, fill) => { const r = ws.addRow(row); r.eachCell({includeEmpty:true}, c => { c.font = {name:'맑은 고딕', size:9}; c.border = BOX; c.alignment = {vertical:'middle', wrapText:true}; if (fill) c.fill = FILL(fill); }); return r; };
+    const S = data.students.map(st => ({st, o: score(st)}));
+    const key = x => RULE.id === 'env' ? [x.o.total, x.o.paper, x.o.patent, x.o.award, x.o.gpa, x.o.eng] : [x.o.total, x.o.paper, x.o.patent, x.o.award];
+    S.sort((a, b) => { const A = key(a), B = key(b); for (let i = 0; i < A.length; i++) if (A[i] !== B[i]) return B[i] - A[i]; return 0; });
+    const nflag = x => x.o.warn.length + ['papers','patents','awards'].reduce((a, k) => a + x.st[k].reduce((b, y) => b + y.flags.length, 0), 0)
+      + x.o.P.filter(p => p[2]).length;
+
+    const w1 = wb.addWorksheet('심의대상자(점수순)');
+    w1.addRow([`${data.평가명} — 심의대상자 점수표 (${RULE.ko})`]).font = {bold:true, size:13};
+    w1.addRow([`실시간 생성 ${stamp} · 노란 칸은 담당자 확인 전 값, 빨간 칸은 확인 필요 · 최종 선정은 ${RULE.committee}`]).font = {size:9, color:{argb:'FFDC2715'}};
+    const cols = ['순위','학번','성명','과정','재학학기','지도교수','논문 점수','특허 점수','수상 점수'].concat(RULE.id === 'env' ? ['학점 점수','영어 점수'] : []).concat(['합계','확인 필요(건)','요건·주의']);
+    head(w1, cols);
+    S.forEach((x, i) => {
+      const n = w1.rowCount + 1, base = RULE.id === 'env' ? 'G' + n + ':K' + n : 'G' + n + ':I' + n;
+      const vals = [i + 1, x.st.학번, x.st.성명, x.st.과정, x.st.재학학기, x.st.지도교수, x.o.paper, x.o.patent, x.o.award].concat(RULE.id === 'env' ? [x.o.gpa, x.o.eng] : [])
+        .concat([{formula: `ROUND(SUM(${base}),2)`, result: x.o.total}, nflag(x), x.o.warn.join(' / ')]);
+      const r = body(w1, vals, nflag(x) ? 'FDE2E1' : null);
+      r.eachCell((c, ci) => { if (ci >= 7 && ci <= cols.length - 2) c.numFmt = '0.00'; });
+    });
+    w1.columns.forEach((c, i) => c.width = [6,11,10,9,8,12,10,10,10,10,10,10,10,40][i] || 12);
+    w1.getColumn(cols.length).width = 46; w1.views = [{state:'frozen', ySplit:3}];
+
+    const w2 = wb.addWorksheet('실적상세');
+    head(w2, ['학번','성명','구분','순번','내용','세부(역할·저자수·색인/구분)','JCR 상위%','점수','계산식','확인 필요','증빙']);
+    S.forEach(x => {
+      x.st.papers.forEach((p, i) => { const [pt, how, w] = x.o.P[i];
+        body(w2, [x.st.학번, x.st.성명, '논문', i + 1, p.저널명, `${p.역할 || '-'} · 저자 ${p.저자수 || '-'}명${RULE.id === 'env' ? ' · ' + (p.색인 || 'SCI') : ''}`, pctOf(p) == null ? '' : r2(pctOf(p)), pt, how,
+          p.flags.map(f => f.내용).concat(w ? [w] : []).join(' / '), p.증빙], (p.flags.length || w) ? 'FDE2E1' : null); });
+      x.st.patents.forEach((p, i) => { const [pt, how, w] = x.o.T[i];
+        body(w2, [x.st.학번, x.st.성명, '특허', i + 1, p.명칭, `${p.구분} · 기여 ${Math.round(p.기여도 * 100)}%`, '', pt, how, p.flags.map(f => f.내용).concat(w ? [w] : []).join(' / '), ''], 'FFF9E6'); });
+      x.st.awards.forEach((p, i) => { const [pt, how] = x.o.A[i];
+        body(w2, [x.st.학번, x.st.성명, '수상', i + 1, p.명칭, p.구분, '', pt, how, p.flags.map(f => f.내용).join(' / '), ''], p.flags.length ? 'FDE2E1' : null); });
+      if (RULE.id === 'env') body(w2, [x.st.학번, x.st.성명, '학점·영어', '', `학점 ${x.st.학점 ?? '-'} · TOEIC ${x.st.TOEIC ?? '-'}`, '', '', r2(x.o.gpa + x.o.eng), `학점 ${x.o.gpa} + 영어 ${x.o.eng}`, x.st.성적증빙 ? '' : '증빙 없음', x.st.성적증빙 || ''], x.st.성적증빙 ? null : 'FFF9E6');
+    });
+    w2.columns.forEach((c, i) => c.width = [11,10,8,6,40,26,10,8,34,40,30][i]);
+
+    const w3 = wb.addWorksheet('더블체크');
+    head(w3, ['학번','성명','항목','확인할 내용','학생 입력','증빙·조회 값'], 'FDE2E1');
+    S.forEach(x => {
+      x.o.warn.forEach(w => body(w3, [x.st.학번, x.st.성명, '요건', w, '', '']));
+      ['papers','patents','awards'].forEach((k, ki) => x.st[k].forEach((it, i) => it.flags.forEach(f => body(w3, [x.st.학번, x.st.성명, ['논문','특허','수상'][ki] + ' ' + (i + 1), f.내용, String(f.학생 ?? ''), String(f.확인 ?? '')]))));
+    });
+    w3.columns.forEach((c, i) => c.width = [11,10,10,50,24,40][i]);
+
+    const w4 = wb.addWorksheet('배점기준');
+    RULE.lines.concat(['', `※ 이 파일은 ${stamp} 기준 실시간 생성본입니다. 학생 입력과 Claude 검증 칸(역할·저자수·JCR)을 담당자가 확인한 뒤 확정하세요.`])
+      .forEach((t, i) => { const r = w4.addRow([t]); r.font = {name:'맑은 고딕', size: i ? 10 : 12, bold: !i}; });
+    w4.getColumn(1).width = 120;
+    wb.views = [{activeTab: 0}];
+    return {wb, flags: S.reduce((a, x) => a + nflag(x), 0), students: S.length, papers: S.reduce((a, x) => a + x.st.papers.length, 0)};
+  }
+  return {toData, build, paperScore, total};
+})();
+
+/*RAW-END*/
+
+const XLSX_LIB = ['https://yhju-gist.github.io/mechro-scholarship-form/exceljs.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js'];
+function loadLib_(){
+  if (window.ExcelJS) return Promise.resolve(window.ExcelJS);
+  return XLSX_LIB.reduce((pr, u) => pr.catch(() => new Promise((ok, no) => {
+    const t = document.createElement('script'); t.src = u; t.onload = () => window.ExcelJS ? ok(window.ExcelJS) : no(); t.onerror = () => { t.remove(); no(); }; document.head.appendChild(t);
+  })), Promise.reject()).catch(() => { throw new Error('엑셀 도구를 불러오지 못했습니다. 인터넷 연결을 확인하고 다시 눌러 주세요.'); });
+}
+async function adminRaw(){
+  const btn = $('#aRaw'), old = btn.textContent; btn.disabled = true; btn.textContent = '만드는 중…';
+  try {
+    const [lib, D] = await Promise.all([loadLib_(), gs('adminList', ADM.key)]);   // 누를 때마다 시트에서 새로 읽음
+    ADM.data = D; renderAdmin();
+    const stamp = D.now || new Date().toISOString().slice(0,16).replace('T',' ');
+    const data = RAW.toData(D, {title: CFG.title, from: CFG.from, to: CFG.to});
+    if (!data.students.length){ alert('아직 유효한 제출이 없습니다.'); return; }
+    const r = RAW.build(data, lib, stamp);
+    const buf = await r.wb.xlsx.writeBuffer();
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([buf], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
+    a.download = `환경에너지공학과_RA_RAWDATA_실시간_${stamp.replace(/[-: ]/g,'').slice(0,12)}.xlsx`; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+    btn.textContent = `✓ 학생 ${r.students}명·논문 ${r.papers}편 (확인 필요 ${r.flags}건)`;
+    setTimeout(() => { btn.textContent = old; }, 6000);
+  } catch(e){ alert((e && e.message) || e); btn.textContent = old; }
+  finally { btn.disabled = false; }
+}
+function adminCsv(){
+  const D = ADM.data; if (!D) return;
+  const rows = [['상태','접수번호','접수시각','학번','성명','과정','재학학기','지도교수','구분','순번','내용','세부','날짜','역할/구분','저자수/기여도','증빙']];
+  D.students.forEach(s => {
+    const base = [s['상태'],s['접수번호'],s['접수시각'],s['학번'],s['성명'],s['과정'],s['재학학기'],s['지도교수']];
+    s.papers.forEach(p => rows.push(base.concat(['논문',p['순번'],p['저널명(학생)'],p['논문제목'],p['Accept일'],p['역할(학생)'],p['저자수(학생)'],p['증빙1']])));
+    s.patents.forEach(p => rows.push(base.concat(['특허',p['순번'],p['명칭'],p['출원·등록번호'],p['일자'],p['구분'],p['기여도(%)'],p['증빙']])));
+    s.awards.forEach(p => rows.push(base.concat(['수상',p['순번'],p['학회·대회명'],p['수상명'],p['일자'],p['구분'],'',p['증빙']])));
+    if (!nItems(s)) rows.push(base.concat(['','','','','','','','']));
+  });
+  const csv = '\ufeff' + rows.map(r => r.map(x => '"' + String(x ?? '').replace(/"/g,'""') + '"').join(',')).join('\r\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'})); a.download = `장학금_제출목록_${(D.now||'').slice(0,10)}.csv`; a.click();
+}
+window.addEventListener('hashchange', route);
+document.addEventListener('click', e => { const b = e.target.closest('.evbtn'); if (b) viewFile(b.dataset.u, b.dataset.l, b.dataset.s); });
+
+(async () => {
+  if (!CFG_TPL && API){ try { const r = await fetch(API + '?action=config'); CFG = Object.assign({}, CFG, await r.json()); } catch(e) {} }
+  init();
+  if (PREVIEW){ const n = $('#notice'); n.style.display=''; n.textContent = T('previewBanner'); $('#go').disabled = true; }
+  route();
+})();
+</script>
+</body>
+</html>
